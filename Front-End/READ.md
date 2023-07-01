@@ -14,7 +14,7 @@
     - COMPONENTS: Chứa tất cả components của dự án
         + Quy định tên file : Chữ đầu cái đầu viết hoá + Viết hoa chữ cái đầu thuộc tính
             VD: AdminProductCart.tsx , ClientProductCart.tsx
-    - CONTEXT: Chứa tất cả class dùng chung của dự án (video: https://www.youtube.com/watch?v=TENin-HxvRg)
+    - CONTEXT: Chứa tất cả UseContext của component trong dự án (video: https://www.youtube.com/watch?v=TENin-HxvRg)
         + Quy định tên file : Chữ đầu cái đầu viết hoá + Viết hoa chữ cái đầu thuộc tính
             VD: AdminProductContext.tsx
     ...
