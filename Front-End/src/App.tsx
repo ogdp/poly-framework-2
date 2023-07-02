@@ -1,11 +1,15 @@
 import { Route, Routes } from "react-router-dom";
 import "./App.css";
+import LayoutCL from "./pages/client/LayoutCL";
 import Home from "./pages/client/Home";
+import LayoutAD from "./pages/admin/LayoutAD";
+import Dashboard from "./pages/admin/Dashboard";
 function App() {
   return (
     <Routes>
-      <Route path="/" element={<Home />}>
-        {/* <Route index element={<Content />} />
+      <Route path="/" element={<LayoutCL />}>
+        <Route index element={<Home />} />
+        {/*
       <Route
         path="products/"
         element={<ClientProductListPage getAllProduct={getAllProduct} />}
@@ -13,9 +17,9 @@ function App() {
       </Route>
       {/* <Route path="auth" element={<SigninPage />}>
     </Route> */}
-      {/* <Route path="/admin" element={<DashBoard />}>
-      <Route index element={<Content />} />
-      <Route path="products">
+      <Route path="/admin" element={<LayoutAD />}>
+        <Route index element={<Dashboard />} />
+        {/* <Route path="products">
         <Route
           index
           element={
@@ -79,8 +83,8 @@ function App() {
       </Route>
       <Route path="users" element={<AdminUserListPage />}>
         <Route path=":id" element={<AdminUserListPage />} />
+      </Route> */}
       </Route>
-    </Route> */}
     </Routes>
   );
 }

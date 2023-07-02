@@ -1,17 +1,14 @@
-import Header from "../../components/client/Header";
-import Footer from "../../components/client/Footer";
+import React from "react";
 type Props = {};
 
-const Home = (props: Props) => {
+const Home: React.FC = (props: Props) => {
   return (
     <section>
-      <Header />
       <main>
         <h1 className="text-3xl font-bold">
           <i className="fa-brands fa-twitter"></i>Home !
         </h1>
       </main>
-      <Footer />
     </section>
   );
 };
