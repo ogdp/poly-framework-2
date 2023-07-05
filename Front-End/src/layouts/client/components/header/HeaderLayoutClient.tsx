@@ -1,8 +1,6 @@
 import { Menu } from "antd";
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import SignupPage from "../../../../pages/client/signup/SignupPage";
-import SigninPage from "../../../../pages/client/signin/SigninPage";
 export default function HeaderLayoutClient() {
     const [show, setshow] = useState(false);
     return (
@@ -77,11 +75,9 @@ export default function HeaderLayoutClient() {
                             </Menu.Item>
                         </Menu>
                     </div>
-                    <div className="py-4">
-                        <SignupPage />
-                    </div>
-                    <div className="pb-4">
-                        <SigninPage />
+                    <div className="flex">
+                        <Link to="/signup" className="mx-4 px-4 py-2 bg-blue-500 hover:bg-blue-700 text-white font-semibold rounded-md">Signup</Link>
+                        <Link to="/signin" className="mx-4 px-4 py-2 bg-green-500 hover:bg-green-700 text-white font-semibold rounded-md">Signin</Link>
                     </div>
                     <div className="pt-4 pb-2">
                         {/* hthi giỏ hàng */}
