@@ -1,6 +1,6 @@
 import { useRef, useState } from 'react';
 import { Button, Form, Input } from 'antd';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { message } from "antd"
 import IUser, { LoginResponse } from '../../../types/user';
 import ReCAPTCHA from 'react-google-recaptcha';
@@ -52,7 +52,7 @@ const SigninPage = () => {
           Dont have account?{" "}
           <span tabIndex={0} role="link" aria-label="Sign up here" className="text-sm font-medium leading-none underline text-gray-800 cursor-pointer">
             {" "}
-            Sign up here
+            <Link to="/signup">Sign up here</Link>
           </span>
         </p>
         <button aria-label="Continue with google" role="button" className="focus:outline-none focus:ring-2 focus:ring-offset-1 focus:ring-gray-700 py-3.5 px-4 border rounded-lg border-gray-700 flex items-center w-full mt-10">

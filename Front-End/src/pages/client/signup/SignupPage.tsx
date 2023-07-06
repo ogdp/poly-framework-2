@@ -1,6 +1,6 @@
 import { useRef, useState } from 'react';
 import { Button, Form, Input } from 'antd';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { message } from "antd"
 import IUser from '../../../types/user';
 import ReCAPTCHA from 'react-google-recaptcha';
@@ -43,6 +43,13 @@ const SignupPage = () => {
       <Form className="mt-[30px] w-[400px] mx-auto" name="form_item_path" layout="vertical" onFinish={onFinish} autoComplete="off">
         <p tabIndex={0} role="heading" aria-label="Login to your account" className="text-2xl font-extrabold leading-6 text-gray-800 mb-8">
           signup to your account
+        </p>
+        <p className="text-sm mt-4 font-medium leading-none text-gray-500">
+          Do you already have an account?{" "}
+          <span tabIndex={0} role="link" aria-label="Sign up here" className="text-sm font-medium leading-none underline text-gray-800 cursor-pointer">
+            {" "}
+            <Link to="/signin">Sign in here</Link>
+          </span>
         </p>
         <Form.Item className='text-black font-bold'
           rules={[
