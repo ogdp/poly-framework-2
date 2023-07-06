@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import { ICategory } from "../../../types/category";
 import { IProduct } from "../../../types/product";
 import { GetOneCategory } from "../../../services/categories";
+import { Divider } from "antd";
 const ProductPage = () => {
   const [products, setProducts] = useState([]);
   const [category, setCategory] = useState([]);
@@ -100,17 +101,25 @@ const ProductPage = () => {
               </select>
             </div>
           </div>
-          <section className="grid grid-cols-3 gap-7 py-4">
-            {products?.map((product: IProduct, index) => (
-              <ClientProductCard
-                key={index}
-                _id={product._id}
-                name={product.name}
-                price={product.price}
-                imageUrl={product.images[0]}
-              />
-            ))}
-          </section>
+          {products.length > 0 ? (
+            <section className="grid grid-cols-3 gap-7 py-4">
+              {products?.map((product: IProduct, index) => (
+                <ClientProductCard
+                  key={index}
+                  _id={product._id}
+                  name={product.name}
+                  price={product.price}
+                  imageUrl={product.images[0]}
+                />
+              ))}
+            </section>
+          ) : (
+            <div className="w-full text-center">
+              <h3 className="text-xl font-medium py-10">
+                Không có sản phẩm nào
+              </h3>
+            </div>
+          )}
         </div>
       </aside>
     </section>

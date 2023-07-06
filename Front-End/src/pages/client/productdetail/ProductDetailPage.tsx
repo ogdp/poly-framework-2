@@ -1,11 +1,22 @@
-import React from 'react'
+import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import { IProductDetail } from "../../../types/product";
+import { GetOneProduct } from "../../../services/product";
+import ListProductDetail from "../../../components/client/ListProductDetail";
+import ListRelatedProduct from "../../../components/client/ListRelatedProduct";
 
-type Props = {}
-
-const ProductDetailPage = (props: Props) => {
+const ProductDetailPage = () => {
+  const { id }: string | any = useParams();
+  const [product, setproduct] = useState<IProductDetail>();
+  useEffect(() => {
+    GetOneProduct(id).then((data: any) => setproduct(data));
+  }, []);
+  if (!product) return null;
   return (
-    <div>ProductDetailPage</div>
-  )
-}
-
-export default ProductDetailPage
+    <section>
+      <ListProductDetail product={product} />
+      <ListRelatedProduct product={product} />
+    </section>
+  );
+};
+export default ProductDetailPage;
