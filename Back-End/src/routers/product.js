@@ -11,10 +11,12 @@ import {
   FilterProductByCategory,
   FilterProductBySalePrice,
   FilterProductBySize,
+  ProductSortByName,
 } from "../controllers/product.js";
 const RouterProduct = express.Router();
 
 RouterProduct.get("/search", SearchProductByName);
+RouterProduct.get("/sortyes", ProductSortByName);
 RouterProduct.get("/filter/price", FilterProductByPrice);
 RouterProduct.get("/filter/size/:size", FilterProductBySize);
 RouterProduct.get("/filter", FilterProductByCategory);
