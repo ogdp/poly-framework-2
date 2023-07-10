@@ -10,6 +10,8 @@ import ProductSale from "../pages/client/productsale";
 import ContactPage from "../pages/client/contacts";
 import ProfilesPage from "../pages/client/profiles";
 import LayoutAdmin from "../layouts/admin";
+import Dashboard from "../pages/admin/Dashboard";
+import ManageUser from "../pages/admin/user";
 
 const Router = () => {
   return (
@@ -28,6 +30,7 @@ const Router = () => {
           <Route path="profiles" element={<ProfilesPage />} />
         </Route>
         <Route path="admin" element={<LayoutAdmin />}>
+          <Route index element={<Dashboard />} />
           {/* <Route index element={<Management />} />
                     <Route path='products'>
                         <Route index element={<ManagementProduct />} />
@@ -36,14 +39,6 @@ const Router = () => {
                     <Route path='categories'>
                         <Route index element={<ManageCategory />} />
                         <Route path=':id/update' element={<ManageCategoryUpdate />} />
-                    </Route>
-                    <Route path='hashtags'>
-                        <Route index element={<ManageHashtag />} />
-                        <Route path=':id/update' element={<ManageHashtagUpdate />} />
-                    </Route>
-                    <Route path='abouts'>
-                        <Route index element={<ManageAbout />} />
-                        <Route path=':id/update' element={<ManageAboutUpdate />} />
                     </Route>
                     <Route path='order/bill'>
                         <Route index element={<ManageBill />} />
@@ -54,10 +49,10 @@ const Router = () => {
                     </Route>
                     <Route path='contacts'>
                         <Route index element={<ManageContact />} />
-                    </Route>
-                    <Route path='accounts'>
-                        <Route index element={<ManageUser />} />
                     </Route> */}
+          <Route path="accounts">
+            <Route index element={<ManageUser />} />
+          </Route>
         </Route>
         <Route path="signin" element={<SigninPage />}></Route>
         <Route path="signup" element={<SignupPage />}></Route>
@@ -66,5 +61,4 @@ const Router = () => {
     </BrowserRouter>
   );
 };
-
 export default Router;
