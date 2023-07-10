@@ -5,8 +5,6 @@ import {
   UserOutlined,
   UnorderedListOutlined,
   ShoppingCartOutlined,
-  TagsOutlined,
-  InfoOutlined,
   PhoneOutlined,
   HomeOutlined
 } from '@ant-design/icons';
@@ -46,6 +44,11 @@ export const items: MenuProps['items'] = [
       <LaptopOutlined />
     ),
     getItem(
+      <Link to="/admin/comments">Quản lý Bình Luận</Link>,
+      'comments',
+      <MessageOutlined />
+    ),
+    getItem(
       <Link to="/admin/contacts">Quản lý liên hệ</Link>,
       'contact',
       <PhoneOutlined />
@@ -66,6 +69,9 @@ export const items: MenuProps['items'] = [
   ]),
   getItem('Danh mục', 'Danh mục', <LaptopOutlined />, [
     getItem(<Link to="/admin/categories">Danh sách danh mục</Link>, '/admin/categories'),
+  ]),
+  getItem('Bình Luận', 'Bình Luận', <MessageOutlined />, [
+    getItem(<Link to="/admin/comments">Danh sách Bình Luận</Link>, '/admin/comments'),
   ]),
   getItem('Liên hệ', 'Liên hệ', <PhoneOutlined />, [
     getItem(<Link to="/admin/contacts">Danh sách Liên hệ</Link>, '/admin/contacts'),
