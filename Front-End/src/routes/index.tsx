@@ -9,6 +9,8 @@ import ProductDetailPage from "../pages/client/productdetail"
 import ProductSale from "../pages/client/productsale"
 import ContactPage from "../pages/client/contacts"
 import LayoutAdmin from "../layouts/admin"
+import Dashboard from "../pages/admin/Dashboard"
+import ManageUser from "../pages/admin/user"
 
 const Router = () => {
     return (
@@ -26,22 +28,14 @@ const Router = () => {
                     <Route path='contacts' element={<ContactPage />} />
                 </Route>
                 <Route path='admin' element={<LayoutAdmin />}>
-                    {/* <Route index element={<Management />} />
-                    <Route path='products'>
+                    <Route index element={<Dashboard />} />
+                    {/* <Route path='products'>
                         <Route index element={<ManagementProduct />} />
                         <Route path=':id/update' element={<ManagementProductUpdate />} />
                     </Route>
                     <Route path='categories'>
                         <Route index element={<ManageCategory />} />
                         <Route path=':id/update' element={<ManageCategoryUpdate />} />
-                    </Route>
-                    <Route path='hashtags'>
-                        <Route index element={<ManageHashtag />} />
-                        <Route path=':id/update' element={<ManageHashtagUpdate />} />
-                    </Route>
-                    <Route path='abouts'>
-                        <Route index element={<ManageAbout />} />
-                        <Route path=':id/update' element={<ManageAboutUpdate />} />
                     </Route>
                     <Route path='order/bill'>
                         <Route index element={<ManageBill />} />
@@ -52,10 +46,10 @@ const Router = () => {
                     </Route>
                     <Route path='contacts'>
                         <Route index element={<ManageContact />} />
-                    </Route>
+                    </Route> */}
                     <Route path='accounts'>
                         <Route index element={<ManageUser />} />
-                    </Route> */}
+                    </Route>
                 </Route>
                 <Route path='signin' element={<SigninPage />}></Route>
                 <Route path='signup' element={<SignupPage />}></Route>

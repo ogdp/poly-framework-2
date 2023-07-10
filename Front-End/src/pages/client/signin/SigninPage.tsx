@@ -7,6 +7,7 @@ import ReCAPTCHA from 'react-google-recaptcha';
 import { EyeInvisibleOutlined, EyeTwoTone } from '@ant-design/icons';
 import { AxiosResponse } from 'axios';
 import { Signin } from '../../../services/auth';
+import ForgotPassword from '../forgotpassword/ForgotPassword';
 const SigninPage = () => {
   const [isVerified, setIsVerified] = useState<boolean>(false);
   const recaptchaRef = useRef<ReCAPTCHA>(null);
@@ -125,9 +126,9 @@ const SigninPage = () => {
         >
           Sign in
         </Button>
-        {/* <div>
+        <div>
           <ForgotPassword />
-        </div> */}
+        </div>
       </Form>
     </section>
   );
