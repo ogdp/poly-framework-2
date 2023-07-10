@@ -50,14 +50,14 @@ const ProductPage = () => {
   if (loading) return <div>Loading ...</div>;
   return (
     <section>
-      <aside className="max-w-[1170px] m-auto">
+      <aside className="max-w-[1170px] m-auto max-sm:py-3">
         <img
           src="https://file.hstatic.net/1000376021/file/1920x720_copy__4___1__451089634ed34e8d9332d622db6c9c0d.png"
           alt=""
         />
       </aside>
-      <aside className="flex max-w-[1170px] w-full m-auto py-7">
-        <div className="order-1 w-3/12">
+      <aside className="md:flex max-w-[1170px] w-full m-auto md:py-7">
+        <div className="order-1 md:w-3/12">
           <div>
             <h3 className="text-2xl font-bold">Danh mục</h3>
           </div>
@@ -81,7 +81,7 @@ const ProductPage = () => {
             ))}
           </div>
         </div>
-        <div className="order-2 w-3/4">
+        <div className="order-2 md:w-3/4">
           <div className="flex justify-between">
             <div>
               <h3 className="text-2xl font-bold">Tất cả sản phẩm</h3>
@@ -102,7 +102,7 @@ const ProductPage = () => {
             </div>
           </div>
           {products.length > 0 ? (
-            <section className="grid grid-cols-3 gap-7 py-4">
+            <section className="grid md:grid-cols-3 max-sm:grid-cols-1 gap-7 py-4">
               {products?.map((product: IProduct, index) => (
                 <ClientProductCard
                   key={index}
