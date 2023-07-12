@@ -1,15 +1,19 @@
+import React, { useState, useContext } from "react";
 import { Alert, Carousel, Form, Image, Input, Select, Space } from "antd";
 import { Link } from "react-router-dom";
 
 import { IProduct, IProductDetail } from "../../types/product";
 import { ICartItem } from "../../types/cart";
-import { useState } from "react";
+
+import { SumCartContext } from "../../context/client/HeaderContext";
 
 type Props = {
   product: IProductDetail;
 };
 
 const ListProductDetail = (props: Props) => {
+  const sumCartContext: any = useContext(SumCartContext);
+
   let cart: ICartItem | undefined = undefined;
   const [notification, setNotification] = useState<boolean>(false);
   const onFinish = async (values: IProduct) => {
@@ -66,6 +70,7 @@ const ListProductDetail = (props: Props) => {
         setTimeout(() => {
           setNotification(false);
         }, 1000);
+        sumCartContext.onHandleSumCart(finalResult.length);
         return;
       } else {
         setNotification(!notification);

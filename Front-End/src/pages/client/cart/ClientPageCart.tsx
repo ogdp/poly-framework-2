@@ -1,9 +1,11 @@
 import { Link } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { ICartItem } from "../../../types/cart";
 import ClientEmptyCart from "../../../components/client/ClientEmptyCart";
 import ClientExistsCart from "../../../components/client/ClientExistsCart";
+import { SumCartContext } from "../../../context/client/HeaderContext";
 const ClientPageCart = () => {
+  const sumCartContext = useContext(SumCartContext);
   const [cart, setCart] = useState<ICartItem[] | undefined>(undefined);
   const [load, setLoad] = useState<boolean>(true);
   useEffect(() => {
@@ -48,6 +50,7 @@ const ClientPageCart = () => {
   }
   function onHandleRemoveItemCart(id: string) {
     const beforeCart = cart?.filter((item) => item._id !== id);
+    sumCartContext?.onHandleSumCart(Number(beforeCart?.length));
     window.localStorage.setItem("cart", JSON.stringify(beforeCart));
     setCart(beforeCart);
     return;
