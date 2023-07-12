@@ -10,7 +10,7 @@ type Props = {
 const ClientProductCard = (props: Props) => {
   if (!props || props == undefined) return <div>Loading ...</div>;
   return (
-    <aside>
+    <aside className="p-4 shadow-md rounded-md transition duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-105">
       <Link to={`/products/${props._id}`}>
         <div className="mb-3">
           <img src={props.imageUrl} className="w-full" alt="" />

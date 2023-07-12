@@ -12,6 +12,7 @@ import ProfilesPage from "../pages/client/profiles";
 import LayoutAdmin from "../layouts/admin";
 import Dashboard from "../pages/admin/Dashboard";
 import ManageUser from "../pages/admin/user";
+import ClientPageCart from "../pages/client/cart/ClientPageCart";
 
 const Router = () => {
   return (
@@ -28,6 +29,7 @@ const Router = () => {
           </Route>
           <Route path="contacts" element={<ContactPage />} />
           <Route path="profiles" element={<ProfilesPage />} />
+          <Route path="cart" element={<ClientPageCart />} />
         </Route>
         <Route path="admin" element={<LayoutAdmin />}>
           <Route index element={<Dashboard />} />
