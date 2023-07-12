@@ -6,7 +6,6 @@ import { Link } from "react-router-dom";
 import { ICategory } from "../../../types/category";
 import { IProduct } from "../../../types/product";
 import { GetOneCategory } from "../../../services/categories";
-import { Divider } from "antd";
 const ProductPage = () => {
   const [products, setProducts] = useState([]);
   const [category, setCategory] = useState([]);
@@ -74,7 +73,7 @@ const ProductPage = () => {
               <div
                 key={index}
                 onClick={() => onHandleGetOneCategory(category._id)}
-                className="font-medium text-[14px] uppercase cursor-pointer py-[1px]"
+                className="font-medium text-[14px] uppercase cursor-pointer py-[1px] sm:hover:bg-slate-300"
               >
                 {category.name}
               </div>

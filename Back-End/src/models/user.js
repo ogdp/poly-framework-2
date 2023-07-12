@@ -11,7 +11,7 @@ const UserModel = new mongoose.Schema(
     },
     address: {
       type: String,
-      required: true,
+      default: "",
     },
     gender: {
       type: String,

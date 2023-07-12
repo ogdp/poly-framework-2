@@ -10,11 +10,7 @@ export const signupSchema = joi.object({
     "string.email": "Trường email không đúng định dạng ",
     "any.required": "Trường email là bắt buộc ",
   }),
-  address: joi.string().required().messages({
-    "string.empty": "Trường address không được để trống ",
-    "string.email": "Trường address không đúng định dạng ",
-    "any.required": "Trường address là bắt buộc ",
-  }),
+  address: joi.any(),
   gender: joi.any(),
   tel: joi.any(),
   imagesAvt: joi.any(),
