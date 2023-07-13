@@ -131,7 +131,7 @@ const SignupPage = () => {
           label="nhập lại mật khẩu"
           rules={[
             {
-              message: "vui lòng nhập confirm password!",
+              message: "vui lòng nhập lại password!",
               required: true,
               min: 6,
             },
