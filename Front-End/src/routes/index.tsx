@@ -12,6 +12,9 @@ import ProfilesPage from "../pages/client/profiles";
 import LayoutAdmin from "../layouts/admin";
 import Dashboard from "../pages/admin/Dashboard";
 import ManageUser from "../pages/admin/user";
+import ManageCategory from "../pages/admin/category";
+import AddCategory from "../pages/admin/category/AddCategory";
+import EditCategory from "../pages/admin/category/EditCategory";
 
 const Router = () => {
   return (
@@ -31,25 +34,26 @@ const Router = () => {
         </Route>
         <Route path="admin" element={<LayoutAdmin />}>
           <Route index element={<Dashboard />} />
-          {/* <Route index element={<Management />} />
-                    <Route path='products'>
-                        <Route index element={<ManagementProduct />} />
-                        <Route path=':id/update' element={<ManagementProductUpdate />} />
-                    </Route>
-                    <Route path='categories'>
-                        <Route index element={<ManageCategory />} />
-                        <Route path=':id/update' element={<ManageCategoryUpdate />} />
-                    </Route>
-                    <Route path='order/bill'>
-                        <Route index element={<ManageBill />} />
-                        <Route path=':id/update' element={<ManageBillUpdate />} />
-                    </Route>
-                    <Route path='comments'>
-                        <Route index element={<ManageComment />} />
-                    </Route>
-                    <Route path='contacts'>
-                        <Route index element={<ManageContact />} />
-                    </Route> */}
+          {/* <Route index element={<Management />} /> */}
+          {/* <Route path="products">
+            <Route index element={<ManagementProduct />} />
+            <Route path=":id/update" element={<ManagementProductUpdate />} />
+          </Route> */}
+          <Route path="categories">
+            <Route index element={<ManageCategory />} />
+            <Route path="add" element={<AddCategory />} />
+            <Route path=":id/edit" element={<EditCategory />} />
+          </Route>
+          {/* <Route path="order/bill">
+            <Route index element={<ManageBill />} />
+            <Route path=":id/update" element={<ManageBillUpdate />} />
+          </Route>
+          <Route path="comments">
+            <Route index element={<ManageComment />} />
+          </Route>
+          <Route path="contacts">
+            <Route index element={<ManageContact />} />
+          </Route> */}
           <Route path="accounts">
             <Route index element={<ManageUser />} />
           </Route>
