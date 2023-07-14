@@ -54,14 +54,14 @@ const ManageComment = () => {
       key: 'Product_id'
     },
     {
-      title: 'bình luận',
-      dataIndex: 'content',
-      key: 'content'
-    },
-    {
       title: 'Người dùng',
       dataIndex: 'User_id',
       key: 'User_id'
+    }, 
+    {
+      title: 'bình luận',
+      dataIndex: 'content',
+      key: 'content'
     },
     {
       title: 'Thời gian',

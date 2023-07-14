@@ -16,6 +16,7 @@ import ClientPageCart from "../pages/client/cart/ClientPageCart";
 import ManageCategory from "../pages/admin/category";
 import EditCategory from "../pages/admin/category/EditCategory";
 import AddCategory from "../pages/admin/category/AddCategory";
+import ManageComment from "../pages/admin/comment/ManageComments";
 
 const Router = () => {
   return (
@@ -36,6 +37,7 @@ const Router = () => {
         </Route>
         <Route path="admin" element={<LayoutAdmin />}>
           <Route index element={<Dashboard />} />
+          <Route path = "/admin/comments" element = {< ManageComment/>} />
           {/* <Route index element={<Management />} /> */}
           {/* <Route path="products">
             <Route index element={<ManagementProduct />} />
