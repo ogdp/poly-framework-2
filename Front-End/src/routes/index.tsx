@@ -45,15 +45,17 @@ const Router = () => {
             <Route index element={<ManageCategory />} />
             <Route path="add" element={<AddCategory />} />
             <Route path=":id/edit" element={<EditCategory />} />
+            
           </Route>
+          
           {/* <Route path="order/bill">
             <Route index element={<ManageBill />} />
             <Route path=":id/update" element={<ManageBillUpdate />} />
           </Route>
-          <Route path="comments">
+          
+          <Route path<Route path="comments">
             <Route index element={<ManageComment />} />
-          </Route>
-          <Route path="contacts">
+          </Route>="contacts">
             <Route index element={<ManageContact />} />
           </Route> */}
           <Route path="accounts">
