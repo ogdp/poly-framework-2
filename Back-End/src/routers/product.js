@@ -24,7 +24,7 @@ RouterProduct.get("/sale", FilterProductBySalePrice);
 RouterProduct.get("/", GetallProduct);
 RouterProduct.get("/:id", getOneProduct);
 RouterProduct.post("/", checkPermission, CreateProduct);
-RouterProduct.put("/:id", checkPermission, UpdateProduct);
+RouterProduct.patch("/:id", UpdateProduct);
 RouterProduct.delete("/:id", checkPermission, RemoveProduct);
 
 export default RouterProduct;

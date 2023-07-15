@@ -7,84 +7,124 @@ import {
   InputNumber,
   Select,
   Space,
-  Upload,
   message,
 } from "antd";
 import axios from "axios";
+import { PlusOutlined, MinusCircleOutlined } from "@ant-design/icons";
 import {
-  UploadOutlined,
-  PlusOutlined,
-  MinusCircleOutlined,
-} from "@ant-design/icons";
-import { CreateProduct } from "../../../services/product";
+  GetOneProduct,
+  UpdateProduct as APIUpdateProduct,
+} from "../../../services/product";
 import { ICategory } from "../../../types/category";
 import { GetAllCategory } from "../../../services/categories";
-import { useNavigate } from "react-router-dom";
-const AddProduct = () => {
+import { useNavigate, useParams } from "react-router-dom";
+import { IProduct } from "../../../types/product";
+const UpdateProduct = () => {
+  const { id } = useParams();
+  const [form] = Form.useForm();
   const navigate = useNavigate();
   const [categories, setCategories] = useState<ICategory[] | undefined>(
     undefined
   );
+  const [product, setProduct] = useState<IProduct | undefined>(undefined);
   const [timeLoadAlert, setTimeLoadAlert] = useState<number>(10000000);
   const [messageApi, contextHolder] = message.useMessage();
   const [formFail, setFormFail] = useState<number>(0);
   useEffect(() => {
+    GetOneProduct(String(id)).then(({ data }) => {
+      setProduct(data);
+      form.setFieldsValue({
+        name: data?.name,
+        price: data.price,
+        CategoryId: data.CategoryId[0]._id,
+        description: data.description,
+        sizes: data.sizes,
+        images: data.images,
+      });
+    });
     GetAllCategory().then(({ data }) => {
       setCategories(data);
     });
   }, []);
-  const beforeUpload = () => {
-    return false;
+
+  let fileListCore: any = 0;
+  const beforeUpload = (e: any) => {
+    // console.log(e.target.files);
+    fileListCore = e.target.files;
+    return true;
   };
   const onFinish = async (values: any) => {
-    setFormFail(0);
-    try {
-      messageApi.open({
-        key: 1,
-        type: "loading",
-        content: "Loading...",
-      });
-      setTimeout(() => {
+    // console.log("after ::: ", values);
+    if (fileListCore?.length > 0) {
+      try {
+        message.loading("Tải lên hình ảnh", 2, () => {});
+        const formData = new FormData();
+        for (const item of fileListCore) {
+          // console.log(item);
+          formData.append("images", item);
+        }
+        const { data } = await axios.post(
+          "https://api-poly-framework-1-5plp.onrender.com/api/images/upload",
+          formData
+        );
+        values.images = data.urls;
+        // console.log("before value ::: ", values);
+        return updateProductNow(values);
+      } catch (error) {
+        message.error("Tải ảnh lên thất bại", 2, () => {});
+        // console.log("Tải ảnh lên thất bại ::: ", error);
+        return;
+      }
+    }
+    updateProductNow(values);
+    async function updateProductNow(values: IProduct | any) {
+      setFormFail(0);
+      try {
         messageApi.open({
           key: 1,
-          type: "success",
-          content: "Thêm sản phẩm thành công!",
-          duration: 2,
+          type: "loading",
+          content: "Loading...",
         });
-      }, timeLoadAlert);
-      const formData = new FormData();
-      for (const item of values.images.fileList) {
-        formData.append("images", item.originFileObj);
-      }
-      const { data } = await axios.post(
-        "https://api-poly-framework-1-5plp.onrender.com/api/images/upload",
-        formData
-      );
-      if (data && data.urls.length > 0) {
-        values.images = data.urls;
+        setTimeout(() => {
+          messageApi.open({
+            key: 1,
+            type: "success",
+            content: "Cập nhật sản phẩm thành công!",
+            duration: 2,
+          });
+        }, timeLoadAlert);
+        const newSize = values.sizes.map(
+          (item: { size?: string; quantity: number; _id?: string }) => {
+            delete item?._id;
+            return item;
+          }
+        );
+        values.sizes = newSize;
         try {
-          const res = await CreateProduct(values);
-          if (res) {
-            setTimeLoadAlert(0);
-            message.success("Thêm sản phẩm thành công", 2, () => {
-              navigate("/admin/products");
-            });
-          } else {
-            setTimeLoadAlert(0);
-            message.error("Thêm sản phẩm thất bại", 2, () => {
-              navigate("/admin/products");
-            });
+          if (values && values !== undefined) {
+            const res = await APIUpdateProduct(values, String(id));
+            if (res) {
+              setTimeLoadAlert(0);
+              message.success("Cập nhật sản phẩm thành công", 2, () => {
+                navigate("/admin/products");
+              });
+            } else {
+              setTimeLoadAlert(0);
+              message.error("Cập nhật sản phẩm thất bại", 2, () => {
+                navigate("/admin/products");
+              });
+            }
           }
         } catch (error) {
+          console.log(error);
           setTimeLoadAlert(0);
-          message.error("Thêm sản phẩm thất bại", 2, () => {});
+          message.error("Cập nhật sản phẩm thất bại", 2, () => {});
         }
+      } catch (error) {
+        console.log(error);
       }
-    } catch (error) {
-      console.log(error);
     }
   };
-
   const onFinishFailed = () => {
     setFormFail(1);
   };
@@ -108,13 +148,14 @@ const AddProduct = () => {
       </Space>
 
       <div>
-        <h2 className="font-bold text-2xl mb-4">Thêm sản phẩm</h2>
+        <h2 className="font-bold text-2xl mb-4">Cập nhật sản phẩm</h2>
       </div>
       <Form
         name="newProductForm"
         onFinish={onFinish}
         onFinishFailed={onFinishFailed}
         layout="vertical"
+        form={form}
       >
         <Form.Item
           label="Tên sản phẩm"
@@ -237,21 +278,23 @@ const AddProduct = () => {
           <Input.TextArea rows={4} />
         </Form.Item>
 
-        <Form.Item
-          label="Ảnh sản phẩm"
-          name="images"
-          rules={[{ required: true, message: "Vui lòng chọn ảnh sản phẩm" }]}
-        >
-          <Upload accept="image/*" multiple beforeUpload={beforeUpload}>
+        <Form.Item label="Ảnh sản phẩm" name="images">
+          {/* <Upload accept="image/*" multiple beforeUpload={beforeUpload}>
             <Button icon={<UploadOutlined />} block>
               Chọn ảnh
             </Button>
-          </Upload>
+          </Upload> */}
+          <input type="file" multiple onChange={beforeUpload} />
+          <div className="flex gap-1 my-3">
+            {product?.images.map((item, index: number) => (
+              <img key={index} src={item} width={"64px"} />
+            ))}
+          </div>
         </Form.Item>
 
         <Form.Item>
           <Button type="primary" className="bg-blue-500" htmlType="submit">
-            Thêm sản phẩm
+            Cập nhật sản phẩm
           </Button>
         </Form.Item>
       </Form>
@@ -259,4 +302,4 @@ const AddProduct = () => {
   );
 };
 
-export default AddProduct;
+export default UpdateProduct;

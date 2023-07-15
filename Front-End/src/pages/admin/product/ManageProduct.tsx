@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Empty, Modal, Table, message } from "antd";
-import { DeleteOutlined } from "@ant-design/icons";
+import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
 import { IProduct } from "../../../types/product";
 import { GetAllProduct, RemoveProduct } from "../../../services/product";
 import { formatDate } from "../../../utils/DateUtils";
@@ -60,7 +60,9 @@ const ManageProduct = () => {
     {
       title: "TÊN",
       dataIndex: "name",
-      key: "name",
+      render: (t: any, r: any) => (
+        <Link to={`/products/${r.key}`}>{`${r.name}`}</Link>
+      ),
     },
     {
       title: "GIÁ",
@@ -87,8 +89,11 @@ const ManageProduct = () => {
             </div>
             <div className="font-semibold text-center">SL</div>
           </div>
-          {r.sizes.map((item: any) => (
-            <div className="border-b border-t border-r border-gray-300">
+          {r.sizes.map((item: any, index: number) => (
+            <div
+              key={index}
+              className="border-b border-t border-r border-gray-300"
+            >
               <div className="border-b border-gray-300 font-semibold px-3">
                 {item.size}
               </div>
@@ -107,19 +112,18 @@ const ManageProduct = () => {
       title: "HÀNH ĐỘNG",
       render: (item: IProduct) => (
         <>
+          <Link
+            to={`/admin/products/${item.key}/update`}
+            className="bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 rounded mr-2"
+          >
+            <EditOutlined />
+          </Link>
           <button
             className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
             onClick={() => HandleRemoveProduct(item.key)}
           >
             <DeleteOutlined />
           </button>
-          <Link
-            to={`/products/${item.key}`}
-            target="_blank"
-            className="mx-2 underline"
-          >
-            Đường dẫn
-          </Link>
         </>
       ),
     },

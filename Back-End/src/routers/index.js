@@ -6,7 +6,6 @@ import RouterUser from "./user.js";
 import RouterProduct from "./product.js";
 import RouterBill from "./bill.js";
 import RouterComment from "./comment.js";
-import RouterImages from "../controllers/uploadImg.js";
 const Router = express.Router();
 
 Router.use("/products", RouterProduct);
@@ -16,5 +15,4 @@ Router.use("/comments", RouterComment);
 Router.use("/auth", routerAuth);
 Router.use("/users", RouterUser);
 Router.use("/bill", RouterBill);
-Router.use("", RouterImages);
 export default Router;

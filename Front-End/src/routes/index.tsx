@@ -15,6 +15,7 @@ import ManageUser from "../pages/admin/user";
 import ClientPageCart from "../pages/client/cart/ClientPageCart";
 import ManageProduct from "../pages/admin/product";
 import AddProduct from "../pages/admin/product/AddProduct";
+import UpdateProduct from "../pages/admin/product/UpdateProduct";
 
 const Router = () => {
   return (
@@ -38,6 +39,7 @@ const Router = () => {
           <Route path="products">
             <Route index element={<ManageProduct />} />
             <Route path="add" element={<AddProduct />} />
+            <Route path=":id/update" element={<UpdateProduct />} />
           </Route>
           {/* <Route index element={<Management />} />
                     <Route path='products'>

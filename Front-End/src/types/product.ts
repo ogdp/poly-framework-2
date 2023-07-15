@@ -1,5 +1,5 @@
 export interface IProduct {
-  _id: string;
+  _id?: string;
   key: string;
   name: string;
   price: number;
@@ -13,12 +13,12 @@ export interface IProduct {
   CategoryId: Category[];
   createdAt?: Date;
   updatedAt?: Date;
-  deletedAt?: Date | null,
+  deletedAt?: Date | null;
 }
 
 export interface IProductDetail {
   data: IProduct;
-  relatedProducts: IProduct[]
+  relatedProducts: IProduct[];
   message: string;
 }
 
@@ -34,9 +34,8 @@ interface Tag {
   products: string[];
   createdAt?: Date;
   updatedAt?: Date;
-  deletedAt?: Date | null,
+  deletedAt?: Date | null;
 }
-
 
 interface Category {
   _id: string;
@@ -44,5 +43,5 @@ interface Category {
   products: string[];
   createdAt?: Date;
   updatedAt?: Date;
-  deletedAt?: Date | null,
+  deletedAt?: Date | null;
 }
