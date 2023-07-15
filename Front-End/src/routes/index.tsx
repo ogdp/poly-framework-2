@@ -19,6 +19,8 @@ import UpdateProduct from "../pages/admin/product/UpdateProduct";
 import ManageCategory from "../pages/admin/category";
 import EditCategory from "../pages/admin/category/EditCategory";
 import AddCategory from "../pages/admin/category/AddCategory";
+import ManageComment from "../pages/admin/comment/ManageComments";
+
 const Router = () => {
   return (
     <BrowserRouter>
@@ -48,6 +50,10 @@ const Router = () => {
             <Route path="add" element={<AddCategory />} />
             <Route path=":id/edit" element={<EditCategory />} />
           </Route>
+          <Route path="comments">
+            <Route index element={<ManageComment />} />
+          </Route>
+
           {/* <Route index element={<Management />} />
                     <Route path='products'>
                         <Route index element={<ManagementProduct />} />
