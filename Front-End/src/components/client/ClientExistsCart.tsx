@@ -38,9 +38,14 @@ const ClientExistsCart = ({ data, onHandleRemoveItemCart }: Props) => {
                 <div className="w-full md:pl-9 md:pt-2 max-md:pl-3">
                   <h3 className="font-bold md:text-lg md:pr-6">{item.name}</h3>
                   <p className="text-red-500"> {formatMoney(item.price)}</p>
-                  <p> {item.size}</p>
+                  <p className="text-sm font-bold text-neutral-700">
+                    {" "}
+                    {item.size}
+                  </p>
                   <div className="flex justify-between">
-                    <div>{item.quantity}</div>
+                    <div className="text-[13px] font-semibold text-[#55657e]">
+                      SL x {item.quantity}
+                    </div>
                     <div className="text-red-500">
                       {formatMoney(item.price * item.quantity)}
                     </div>

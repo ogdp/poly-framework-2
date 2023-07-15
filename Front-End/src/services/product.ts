@@ -38,8 +38,8 @@ export const CreateProduct = (data: IProduct) => {
   });
 };
 
-export const UpdateProduct = (data: IProduct) => {
-  return intansce.put(`/products/${data._id}`, data, {
+export const UpdateProduct = (data: IProduct, _id: string) => {
+  return intansce.patch(`/products/${_id}`, data, {
     headers: {
       Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
     },
