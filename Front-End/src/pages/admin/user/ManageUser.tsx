@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import IUser from '../../../types/user';
 import { DeleteOutlined } from "@ant-design/icons"
 import { GetAllUser, RemoveUser } from '../../../services/user';
+import { formatDate } from '../../../utils/DateUtils';
 
 const ManageUser = () => {
   const [users, setusers] = useState<IUser[]>([])
@@ -64,12 +65,13 @@ const ManageUser = () => {
       key: 'role'
     },
     {
-      title: 'created At',
-      dataIndex: 'createdAt',
-      key: 'createdAt'
+      title: "Ngày tạo",
+      dataIndex: "createdAt",
+      key: "createdAt",
+      render: (createdAt: any) => formatDate(createdAt),
     },
     {
-      title: 'action',
+      title: "Hành động",
       render: (item: IUser) => <>
         {item.role === 'admin' ? <Button hidden>delete</Button> :
           <button className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded" onClick={() => HandleRemoveUser(item.key)} ><DeleteOutlined /></button>
@@ -80,7 +82,7 @@ const ManageUser = () => {
 
   const data = users.map((item: IUser, index: number) => {
     return {
-      index: index,
+      index: index + 1,
       key: item._id,
       name: item.name,
       email: item.email,
