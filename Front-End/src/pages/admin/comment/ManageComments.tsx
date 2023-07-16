@@ -82,8 +82,8 @@ const ManageComment = () => {
     return {
       index: index,
       key: item._id,
-      Product_id: item.Product_id,
-      User_id: item.User_id,
+      Product: item.Product,
+      name: item.name,
       content:item.content,
       role: item.role,
       createdAt: item.createdAt,
