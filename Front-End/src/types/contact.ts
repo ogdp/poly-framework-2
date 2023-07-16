@@ -6,6 +6,7 @@ interface IContact {
     phone: number,
     address: string,
     support: string,
+    role: "admin" | "member",
     createdAt?: Date;
     updatedAt?: Date;
     deletedAt?: Date | null,

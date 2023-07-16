@@ -1,18 +1,16 @@
 import { Table, Button, Empty, message, Modal } from 'antd';
 import { useEffect, useState } from 'react';
 import { DeleteOutlined } from "@ant-design/icons"
-import IComment from '../../../types/comment';
-import { AdGetAllComment, RemoveComment } from '../../../services/comments';
-import { Link } from 'react-router-dom';
-import { formatDate } from '../../../utils/DateUtils';
+import IContact from '../../../types/contact';
+import { GetAllContact, RemoveContact } from '../../../services/contact';
 
-const ManageComment = () => {
-  const [coments, setcoments] = useState<any>([])
+const ManageContact = () => {
+  const [contacts, setcontacts] = useState<IContact[]>([])
   useEffect(() => {
-    AdGetAllComment().then(({ data }) => setcoments(data))
+    GetAllContact().then(({ data }) => setcontacts(data))
   }, [])
 
-  const HandleRemoveComment = async (_id: string) => {
+  const HandleRemoveContact = async (_id: string) => {
     try {
       Modal.confirm({
         title: 'Confirm',
@@ -28,11 +26,11 @@ const ManageComment = () => {
             if (loading) {
               loading();
             }
-            const response = await RemoveComment(_id);
+            const response = await RemoveContact(_id);
             if (response) {
-              message.success('xóa bình luận thành công!', 3);
-              const dataNew = coments.filter((data : any) => data._id !== _id);
-              setcoments(dataNew);
+              message.success('xóa liên hệ thành công!', 3);
+              const dataNew = contacts.filter((data) => data._id !== _id);
+              setcontacts(dataNew);
             }
           }, 2000);
         },
@@ -47,46 +45,48 @@ const ManageComment = () => {
   const columns = [
     {
       title: 'STT',
-      dataIndex: 'index',
+      dataIndex: 'index', 
       key: 'index+1'
     },
     {
-      title: 'SẢN PHẨM',
-      dataIndex: 'nameProduct',
-      render: (t: any, r: any) => <Link target='_blank' to={`/products/${r.key}`} >{`${r.nameProduct}`}</Link>,
+      title: 'SĐT',
+      dataIndex: 'phone',
+      key: 'phone'
     },
     {
       title: 'THÀNH VIÊN',
-      dataIndex: 'nameUser',
-     key: "nameUser"
+      dataIndex: 'name',
+      key: 'name'
     }, 
     {
-      title: 'BÌNH LUẬN',
-      dataIndex: 'content',
-      key: 'content'
+      title: 'ĐỊA CHỈ',
+      dataIndex: 'address',
+      key: 'address'
     },
     {
-      title: 'THỜI GIAN',
-      dataIndex: 'createdAt',
-      render: (t: any, r: any) => <span >{`${formatDate(r.createdAt)}`}</span>,
+      title: 'HỖ TRỢ',
+      dataIndex: 'support',
+      key: 'support'
     },
     {
       title: 'HÀNH ĐỘNG',
-      render: (item: IComment) => <>
+      render: (item: IContact) => <>
         {item.role === 'admin' ? <Button hidden>delete</Button> :
-          <button className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded" onClick={() => HandleRemoveComment(item._id)} ><DeleteOutlined /></button>
+          <button className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded" onClick={() => HandleRemoveContact(item._id)} ><DeleteOutlined /></button>
         }
       </>
     },
   ];
 
-  const data = coments.map((item: any, index: number) => {
+  const data = contacts.map((item: IContact, index: number) => {
     return {
-      index: index + 1,
+      index: index,
       key: item._id,
-      nameProduct: item.product.name,
-      nameUser: item.user.name,
-      content:item.content,
+      name: item.name,
+      email: item.email,
+      phone: item.phone,
+      address: item.address,
+      support: item.support,
       role: item.role,
       createdAt: item.createdAt,
     }
@@ -107,4 +107,4 @@ const ManageComment = () => {
   )
 }
 
-export default ManageComment
+export default ManageContact

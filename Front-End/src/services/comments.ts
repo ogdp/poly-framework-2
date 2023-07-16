@@ -4,6 +4,9 @@ import intansce from "./intansce"
 export const GetAllComment = () => {
     return intansce.get('/comments')
 }
+export const AdGetAllComment = () => {
+    return intansce.get('/comments/ad')
+}
 
 export const GetOneComment = (_id: number) => {
     return intansce.get('/comments/' + _id)
