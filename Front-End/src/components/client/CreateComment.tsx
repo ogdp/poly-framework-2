@@ -43,11 +43,11 @@ const CreateComment = () => {
   return (
     <div className="container mx-auto px-4 py-8">
       <div>
-        <h1 className="text-2xl font-bold mb-4">Comment List</h1>
+        <h1 className="text-2xl font-bold mb-4">Tất cả bình luận</h1>
         {/* List comments */}
         <div className="mb-8">
           {data.length === 0 ? (
-            <div className="text-gray-600">chưa có bình luận nào</div>
+            <div className="text-gray-600">Chưa có bình luận nào</div>
           ) : (
             data.map((cmt: any) => {
               return (
@@ -64,7 +64,7 @@ const CreateComment = () => {
           )}
         </div>
       </div>
-      <h1 className="text-2xl font-bold mb-4">Leave a Comment</h1>
+      <h1 className="text-2xl font-bold mb-4">Viết bình luận</h1>
       <Form
         name="form_item_path"
         layout="vertical"
@@ -73,10 +73,10 @@ const CreateComment = () => {
       >
         <Form.Item
           name="content"
-          label="content"
+          label="Nội dung"
           rules={[
             {
-              message: "please enter content!",
+              message: "Vui lòng nhập nội dung!",
               required: true,
             },
           ]}
@@ -98,7 +98,7 @@ const CreateComment = () => {
             type="submit"
             className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded"
           >
-            Submit
+            Gửi
           </button>
         )}
       </Form>

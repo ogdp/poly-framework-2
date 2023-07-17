@@ -6,7 +6,7 @@ const ListRelatedProduct = (props: Props) => {
     return (
         <section>
             <div className="products-tile">
-                <h2 className='font-bold text-[24px] my-12 text-[#111928]'>Related Products</h2>
+                <h2 className='font-bold text-[24px] my-12 text-[#111928]'>Sản phẩm liên quan</h2>
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-8">
                 {props.product.relatedProducts.map((item: any) => {
@@ -26,7 +26,7 @@ const ListRelatedProduct = (props: Props) => {
                                     <button
                                         className="w-full px-4 py-3 text-center bg-black text-white rounded-xl"
                                     >
-                                        Add to cart
+                                        Thêm vào giỏ hàng
                                     </button>
                                 </div>
                             </div>

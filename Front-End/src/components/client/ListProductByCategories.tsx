@@ -56,7 +56,7 @@ const ListProductByCategories = () => {
                                                 <button
                                                     className="flex justify-center px-4 py-2 text-blue-600 border border-blue-300 rounded-full dark:border-gray-600 dark:text-gray-400 hover:bg-blue-700 hover:text-gray-100 dark:hover:bg-gray-800 dark:hover:border-gray-900"
                                                 >
-                                                    Add to cart
+                                                    Thêm vào giỏ hàng
                                                 </button>
                                             </div>
                                         </div>
