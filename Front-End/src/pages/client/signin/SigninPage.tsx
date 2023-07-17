@@ -142,7 +142,7 @@ const SigninPage = () => {
           label="Email"
           rules={[
             {
-              message: "vui lòng nhập email!",
+              message: "Vui lòng nhập email!",
               required: true,
               type: "email",
             },
@@ -150,7 +150,7 @@ const SigninPage = () => {
         >
           <Input
             className="font-mono border border-indigo-600 h-10"
-            placeholder="nhập email"
+            placeholder="Nhập email"
           />
         </Form.Item>
         <Form.Item
@@ -159,7 +159,7 @@ const SigninPage = () => {
           label="mật khẩu"
           rules={[
             {
-              message: "vui lòng nhập password!",
+              message: "Vui lòng nhập password!",
               required: true,
               min: 6,
             },
@@ -168,7 +168,7 @@ const SigninPage = () => {
           <Input.Password
             type="password"
             className="font-mono border border-indigo-600 h-10"
-            placeholder="nhập password"
+            placeholder="Nhập password"
             iconRender={(visible) =>
               visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />
             }
@@ -191,7 +191,7 @@ const SigninPage = () => {
         </Form.Item>
         <Button
           htmlType="submit"
-          className="w-full h-[52px] text-center py-3 rounded bg-[#4a71c4] text-white hover:bg-green-dark focus:outline-none my-1"
+          className="w-full h-[52px] text-center py-3 rounded-xl bg-[black] text-white hover:bg-green-dark focus:outline-none my-1"
         >
           Sign in
         </Button>

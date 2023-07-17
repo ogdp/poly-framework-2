@@ -14,10 +14,10 @@ const Homepage = () => {
     try {
       setQuery(value);
       const response = await SearchProductByName(value)
-      message.success('successfully product search')
+      message.success('Tìm kiếm sản phẩm thành công')
       setProducts(response.data);
     } catch (error: any) {
-      message.warning('No products found');
+      message.warning('Không tìm thấy dữ liệu');
     }
   };
   const [minPrice, setMinPrice] = useState<number>(0);
@@ -26,10 +26,10 @@ const Homepage = () => {
     try {
       setQuery([minPrice, maxPrice]);
       const response = await FindProductByPrice(minPrice, maxPrice);
-      message.success('successfully product search')
+      message.success('Tìm kiếm sản phẩm thành công')
       setProducts(response.data);
     } catch (error: any) {
-      message.warning('No products found');
+      message.warning('Không tìm thấy dữ liệu');
     }
   };
   return (
@@ -56,7 +56,7 @@ const Homepage = () => {
                 <div className="relative flex items-center">
                   <Input.Search
                     className="w-full max-w-xs p-2 rounded-full bg-[#5765be] focus:bg-white"
-                    placeholder="Search products"
+                    placeholder="Tìm kiếm"
                     onSearch={handleSearch}
                     enterButton={<SearchOutlined />}
                   />
@@ -69,20 +69,20 @@ const Homepage = () => {
           <div className="w-full pr-4 lg:w-1/4 lg:block">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div className="flex flex-col bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md">
-                <label className="text-gray-700 dark:text-gray-400 font-semibold mb-2">Min Price:</label>
+                <label className="text-gray-700 dark:text-gray-400 font-semibold mb-2">Gía tối thiểu:</label>
                 <input className="px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 dark:focus:ring-blue-500 focus:border-transparent transition-colors" type="number"
                   value={minPrice}
                   onChange={(e) => setMinPrice(parseInt(e.target.value))} />
               </div>
               <div className="flex flex-col bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md">
-                <label className="text-gray-700 dark:text-gray-400 font-semibold mb-2">Max Price:</label>
+                <label className="text-gray-700 dark:text-gray-400 font-semibold mb-2">Gía tối đa:</label>
                 <input
                   className="px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 dark:focus:ring-blue-500 focus:border-transparent transition-colors" type="number"
                   value={maxPrice}
                   onChange={(e) => setMaxPrice(parseInt(e.target.value))} />
               </div>
               <div className="flex flex-col bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md">
-                <button className="px-4 py-2 bg-blue-600 text-white rounded-md transition-colors hover:bg-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-400 dark:focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-white" onClick={handleFilter}>Filter</button>
+                <button className="px-4 py-2 bg-blue-600 text-white rounded-md transition-colors hover:bg-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-400 dark:focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-white" onClick={handleFilter}>Lọc</button>
               </div>
             </div>
           </div>

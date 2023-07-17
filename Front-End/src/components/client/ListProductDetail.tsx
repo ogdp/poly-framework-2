@@ -6,6 +6,7 @@ import { IProduct, IProductDetail } from "../../types/product";
 import { ICartItem } from "../../types/cart";
 
 import { SumCartContext } from "../../context/client/HeaderContext";
+import { formatMoney } from "../../utils/MoneyUtils";
 
 type Props = {
   product: IProductDetail;
@@ -127,7 +128,7 @@ const ListProductDetail = (props: Props) => {
         ""
       )}
       <p className=" focus:outline-none px-4 mb-4 focus:ring-2 focus:ring-offset-2 focus:ring-gray-800 font-normal text-base leading-4 text-gray-600">
-        <Link to="/">Home</Link> / <Link to="/products">products</Link> /{" "}
+        <Link to="/">Trang chủ</Link> / <Link to="/products">Sản phẩm</Link> /{" "}
         {props.product.data.name}
       </p>
       <div key={props.product.data._id} className=" px-4 mx-auto">
@@ -186,16 +187,17 @@ const ListProductDetail = (props: Props) => {
                     {props.product.data.name}
                   </h2>
                   <p className="inline-block text-2xl font-semibold text-gray-700 dark:text-gray-400 ">
-                    <span className="text-bold text-[red]">
-                      ${props.product.data.salePrice}
+                    {props.product.data.salePrice > 0 ? <span className="text-bold text-[red]">
+                      {formatMoney(props.product.data.salePrice)}
                     </span>
+                      : ''}
                     {props.product.data.salePrice > 0 ? (
                       <span className="ml-3 text-base font-normal text-gray-500 line-through dark:text-gray-400">
-                        ${props.product.data.price}
+                        {formatMoney(props.product.data.price)}
                       </span>
                     ) : (
                       <span className="text-bold text-[red]">
-                        {props.product.data.price}
+                        {formatMoney(props.product.data.price)}
                       </span>
                     )}
                   </p>
@@ -210,12 +212,12 @@ const ListProductDetail = (props: Props) => {
                     className="w-[200px]"
                     rules={[
                       {
-                        message: "please enter size!",
+                        message: "vui lòng nhập size!",
                         required: true,
                       },
                     ]}
                     name="sizes"
-                    label="choose shoe size"
+                    label="Chọn kích cỡ"
                   >
                     <Select
                       placeholder="37"
@@ -230,12 +232,12 @@ const ListProductDetail = (props: Props) => {
                     className="w-[200px]"
                     rules={[
                       {
-                        message: "please enter quantity!",
+                        message: "Vui lòng nhập số lượng!",
                         required: true,
                       },
                     ]}
                     name="quantity"
-                    label="quantity"
+                    label="Số lượng"
                   >
                     <Input
                       type="number"
@@ -248,7 +250,7 @@ const ListProductDetail = (props: Props) => {
                 </div>
                 <div className="flex gap-4 mb-6">
                   <button className="w-full px-4 py-3 text-center bg-black text-white rounded-xl">
-                    Add to cart
+                    Thêm vào giỏ hàng
                   </button>
                 </div>
               </div>

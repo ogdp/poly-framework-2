@@ -66,7 +66,7 @@ export default function HeaderLayoutClient() {
                   to="/"
                   className="text-sm text-gray-700 hover:text-blue-400 font-bold dark:text-gray-400"
                 >
-                  Home
+                  Trang chủ
                 </Link>
               </li>
               <li className="pb-3">
@@ -74,7 +74,7 @@ export default function HeaderLayoutClient() {
                   to="/products"
                   className="text-sm text-gray-700 hover:text-blue-400 font-bold dark:text-gray-400"
                 >
-                  Products
+                  Sản phẩm
                 </Link>
               </li>
               <li className="pb-3">
@@ -82,7 +82,7 @@ export default function HeaderLayoutClient() {
                   to="/products/sales"
                   className="text-sm text-[red] font-bold"
                 >
-                  News Sale
+                  Sản phẩm sale
                 </Link>
               </li>
               <li className="pb-3">
@@ -90,7 +90,7 @@ export default function HeaderLayoutClient() {
                   to="/contacts"
                   className="text-sm text-gray-700 font-bold hover:text-blue-400 dark:text-gray-400"
                 >
-                  Contacts-Us
+                  Liên hệ
                 </Link>
               </li>
             </ul>
@@ -115,13 +115,13 @@ export default function HeaderLayoutClient() {
                 to="/signup"
                 className="mx-4 px-4 py-2 bg-blue-500 hover:bg-blue-700 text-white font-semibold rounded-md"
               >
-                Signup
+                Đăng ký
               </Link>
               <Link
                 to="/signin"
                 className="mx-4 px-4 py-2 bg-green-500 hover:bg-green-700 text-white font-semibold rounded-md"
               >
-                Signin
+                Đăng nhập
               </Link>
             </div>
           </div>
@@ -196,16 +196,16 @@ export default function HeaderLayoutClient() {
           <div className="block sm:hidden md:block">
             <ul>
               <li className="hover:bg-slate-200 h-8" key="home">
-                <Link to="/">Home</Link>
+                <Link to="/">Trang chủ</Link>
               </li>
               <li className="hover:bg-slate-200 h-8" key="products">
-                <Link to="/products">Products</Link>
+                <Link to="/products">Sản phẩm</Link>
               </li>
               <li className="hover:bg-slate-200 h-8" key="products/sales">
-                <Link to="/products/sales">News Sale</Link>
+                <Link to="/products/sales">Sản phẩm sale</Link>
               </li>
               <li className="hover:bg-slate-200 h-8" key="contacts">
-                <Link to="/contacts">Contact-Us</Link>
+                <Link to="/contacts">Liên hệ</Link>
               </li>
             </ul>
           </div>
@@ -214,13 +214,13 @@ export default function HeaderLayoutClient() {
               to="/signup"
               className="mx-2 px-2 py-2 bg-blue-500 hover:bg-blue-700 text-white font-semibold rounded-md"
             >
-              Signup
+              Đăng ký
             </Link>
             <Link
               to="/signin"
               className="mx-2 px-2 py-2 bg-green-500 hover:bg-green-700 text-white font-semibold rounded-md"
             >
-              Signin
+              Đăng nhập
             </Link>
             {/* Shopping cart icon */}
             <Link
