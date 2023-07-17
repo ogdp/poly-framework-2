@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { formatMoney } from "../../utils/MoneyUtils";
 type Props = {
-  _id: string;
+  _id: string | undefined;
   imageUrl: string;
   name: string;
   price: number;
