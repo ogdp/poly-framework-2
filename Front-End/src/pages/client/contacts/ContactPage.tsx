@@ -158,7 +158,7 @@ const ContactPage = () => {
               <Form.Item
                 className="text-black font-bold"
                 name="message"
-                label="Địa chỉ"
+                label="Tin nhắn"
                 rules={[
                   {
                     message: "Nhập tin nhắn!",
