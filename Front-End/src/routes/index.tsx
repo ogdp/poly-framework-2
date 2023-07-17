@@ -20,6 +20,7 @@ import ManageCategory from "../pages/admin/category";
 import EditCategory from "../pages/admin/category/EditCategory";
 import AddCategory from "../pages/admin/category/AddCategory";
 import ManageComment from "../pages/admin/comment/ManageComments";
+import ManageContact from "../pages/admin/contact/ManageContact";
 import ClientPageBill from "../pages/client/bill/ClientPageBill";
 
 const Router = () => {
@@ -54,6 +55,9 @@ const Router = () => {
           </Route>
           <Route path="comments">
             <Route index element={<ManageComment />} />
+          </Route>
+          <Route path="contacts">
+            <Route index element={<ManageContact />} />
           </Route>
 
           {/* <Route index element={<Management />} />

@@ -18,6 +18,59 @@ export const getAllComment = async (req, res) => {
     });
   }
 };
+export const AdGetAllComment = async (req, res) => {
+  try {
+    const comment = await Comment.aggregate([
+      {
+        $lookup: {
+          from: "users",
+          localField: "User_id",
+          foreignField: "_id",
+          as: "user"
+        }
+      },
+      {
+        $lookup: {
+          from: "products",
+          localField: "Product_id",
+          foreignField: "_id",
+          as: "product"
+        }
+      },
+      {
+        $unwind: "$user"
+      },
+      {
+        $unwind: "$product"
+      },
+      {
+        $project: {
+          _id: 1,
+          content: 1,
+          createdAt: 1,
+          updatedAt: 1,
+          Product_id: 1,
+          User_id: 1,
+          "user.name": 1,
+          "product.name": 1
+        }
+      }
+    ])
+    if (comment.length === 0) {
+      return res.status(404).json({
+        message: "Không có bình luận nào",
+      });
+    }
+    return res.status(200).json({
+      message: "thành công",
+      data: comment,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      message: error.message,
+    });
+  }
+};
 
 export const getOneComment = async function (req, res) {
   try {

@@ -2,26 +2,23 @@ import { Table, Button, Empty, message, Modal } from "antd";
 import { useEffect, useState } from "react";
 import { DeleteOutlined } from "@ant-design/icons";
 import IComment from "../../../types/comment";
-import { GetAllComment, RemoveComment } from "../../../services/comments";
+import { AdGetAllComment, RemoveComment } from "../../../services/comments";
+import { Link } from "react-router-dom";
 import { formatDate } from "../../../utils/DateUtils";
-import { GetOneUser } from "../../../services/user";
 
 const ManageComment = () => {
-  const [coments, setcoments] = useState<IComment[]>([]);
+  const [coments, setcoments] = useState<any>([]);
   useEffect(() => {
-    GetAllComment().then(({ data }) => setcoments(data));
-    GetOneUser("64a6cf1436f56828aa324a05").then(({ data }) =>
-      console.log(data)
-    );
+    AdGetAllComment().then(({ data }) => setcoments(data));
   }, []);
 
   const HandleRemoveComment = async (_id: string) => {
     try {
       Modal.confirm({
-        title: "Xác nhận",
-        content: "Bạn có chắc chắn muốn xoá bình luận không ?",
-        okText: "Xoá",
-        cancelText: "Huỷ",
+        title: "Confirm",
+        content: "Are you sure you want to delete this about?",
+        okText: "Yes",
+        cancelText: "No",
         okButtonProps: {
           className:
             "bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded", // áp dụng lớp CSS
@@ -37,14 +34,14 @@ const ManageComment = () => {
             }
             const response = await RemoveComment(_id);
             if (response) {
-              message.success("Xoá bình luận thành công!", 3);
-              const dataNew = coments.filter((data) => data._id !== _id);
+              message.success("Xóa bình luận thành công!", 3);
+              const dataNew = coments.filter((data: any) => data._id !== _id);
               setcoments(dataNew);
             }
           }, 2000);
         },
         onCancel: () => {
-          message.success("Huỷ thành công!");
+          message.success("Đã huỷ!");
         },
       });
     } catch (error: any) {
@@ -55,20 +52,25 @@ const ManageComment = () => {
     {
       title: "STT",
       dataIndex: "index",
-      key: "index",
+      key: "index+1",
     },
     {
       title: "SẢN PHẨM",
-      dataIndex: "Product_id",
-      key: "Product_id",
+      dataIndex: "nameProduct",
+      render: (t: any, r: any) => (
+        <Link
+          target="_blank"
+          to={`/products/${r.key}`}
+        >{`${r.nameProduct}`}</Link>
+      ),
     },
     {
-      title: "NGƯỜI DÙNG",
-      dataIndex: "User_id",
-      render: (t: any, r: any) => <span>{`${r.User_id}`}</span>,
+      title: "THÀNH VIÊN",
+      dataIndex: "nameUser",
+      key: "nameUser",
     },
     {
-      title: "NỘI DUNG",
+      title: "BÌNH LUẬN",
       dataIndex: "content",
       key: "content",
     },
@@ -78,7 +80,7 @@ const ManageComment = () => {
       render: (t: any, r: any) => <span>{`${formatDate(r.createdAt)}`}</span>,
     },
     {
-      title: "Hành Động",
+      title: "HÀNH ĐỘNG",
       render: (item: IComment) => (
         <>
           {item.role === "admin" ? (
@@ -86,7 +88,7 @@ const ManageComment = () => {
           ) : (
             <button
               className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
-              onClick={() => HandleRemoveComment(item.key)}
+              onClick={() => HandleRemoveComment(item._id)}
             >
               <DeleteOutlined />
             </button>
@@ -96,12 +98,12 @@ const ManageComment = () => {
     },
   ];
 
-  const data = coments.map((item: IComment, index: number) => {
+  const data = coments.map((item: any, index: number) => {
     return {
       index: index + 1,
       key: item._id,
-      Product_id: item.Product_id,
-      User_id: item.User_id,
+      nameProduct: item.product.name,
+      nameUser: item.user.name,
       content: item.content,
       role: item.role,
       createdAt: item.createdAt,
