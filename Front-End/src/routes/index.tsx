@@ -20,6 +20,7 @@ import ManageCategory from "../pages/admin/category";
 import EditCategory from "../pages/admin/category/EditCategory";
 import AddCategory from "../pages/admin/category/AddCategory";
 import ManageComment from "../pages/admin/comment/ManageComments";
+import ClientPageBill from "../pages/client/bill/ClientPageBill";
 
 const Router = () => {
   return (
@@ -37,6 +38,7 @@ const Router = () => {
           <Route path="contacts" element={<ContactPage />} />
           <Route path="profiles" element={<ProfilesPage />} />
           <Route path="cart" element={<ClientPageCart />} />
+          <Route path="bill/:id" element={<ClientPageBill />} />
         </Route>
         <Route path="admin" element={<LayoutAdmin />}>
           <Route index element={<Dashboard />} />
