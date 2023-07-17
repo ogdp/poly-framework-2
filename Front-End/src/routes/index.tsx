@@ -23,7 +23,7 @@ import ManageComment from "../pages/admin/comment/ManageComments";
 import ManageContact from "../pages/admin/contact/ManageContact";
 import ClientPageBill from "../pages/client/bill/ClientPageBill";
 import TermOfServicePage from "../pages/client/tos/service/TermOfServicePage";
-import WarrantyPage from "../pages/client/tos/warranty/Warrantypage";
+import WarrantyPage from "../pages/client/tos/warranty/WarrantyPage";
 import RulePage from "../pages/client/tos/rules/RulePage";
 import ReturnPage from "../pages/client/tos/return/ReturnPage";
 

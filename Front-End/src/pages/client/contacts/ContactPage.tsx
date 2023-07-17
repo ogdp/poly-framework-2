@@ -134,7 +134,7 @@ const ContactPage = () => {
               >
                 <Input
                   className="font-mono border border-indigo-600 h-10"
-                  placeholder="Nhập email"
+                  placeholder="Địa chỉ ..."
                 />
               </Form.Item>
               <Form.Item
