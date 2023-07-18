@@ -1,19 +1,33 @@
+import { ICartItem } from "./cart";
+
 interface IBill {
   _id: string;
   key: string;
   name: string;
   email: string;
   phone: number;
-  address: string,
+  address: string;
   items: Itembill[];
   total: number;
   status: String;
-  orderCode:number;
+  orderCode: number;
   createdAt?: Date;
   updatedAt?: Date;
   deletedAt?: Date | null;
 }
-
+export interface DIBill {
+  _id?: string;
+  name: string;
+  email: string;
+  phone: number;
+  address: string;
+  items: ICartItem[];
+  total: number;
+  User_id: string;
+  createdAt?: Date;
+  updatedAt?: Date;
+  deletedAt?: Date | null;
+}
 export interface Itembill {
   _id: string;
   image: string;
@@ -22,10 +36,8 @@ export interface Itembill {
   size: number;
   quantity: number;
 }
-export default IBill
-
+export default IBill;
 
 export interface IBillState {
   BillItems: IBill[];
 }
-
