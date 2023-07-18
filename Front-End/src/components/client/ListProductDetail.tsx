@@ -19,10 +19,11 @@ const ListProductDetail = (props: Props) => {
   const [notification, setNotification] = useState<boolean>(false);
   const onFinish = async (values: IProduct) => {
     const nice: any = props.product.data;
+    const convertPrice = nice.salePrice > 0 ? nice.salePrice : nice.price;
     cart = {
       _id: props.product.data._id,
       name: nice.name,
-      price: nice.price,
+      price: convertPrice,
       size: String(values.sizes),
       quantity: Number(values.quantity),
       image: nice.images[0],
@@ -187,10 +188,13 @@ const ListProductDetail = (props: Props) => {
                     {props.product.data.name}
                   </h2>
                   <p className="inline-block text-2xl font-semibold text-gray-700 dark:text-gray-400 ">
-                    {props.product.data.salePrice > 0 ? <span className="text-bold text-[red]">
-                      {formatMoney(props.product.data.salePrice)}
-                    </span>
-                      : ''}
+                    {props.product.data.salePrice > 0 ? (
+                      <span className="text-bold text-[red]">
+                        {formatMoney(props.product.data.salePrice)}
+                      </span>
+                    ) : (
+                      ""
+                    )}
                     {props.product.data.salePrice > 0 ? (
                       <span className="ml-3 text-base font-normal text-gray-500 line-through dark:text-gray-400">
                         {formatMoney(props.product.data.price)}
