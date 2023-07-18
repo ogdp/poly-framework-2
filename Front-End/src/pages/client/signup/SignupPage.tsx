@@ -74,17 +74,17 @@ const SignupPage = () => {
           className="text-black font-bold"
           rules={[
             {
-              message: "vui lòng nhập name!",
+              message: "Vui lòng nhập name!",
               required: true,
               min: 3,
             },
           ]}
           name="name"
-          label="name"
+          label="Name"
         >
           <Input
             className="font-mono border border-indigo-600 h-10"
-            placeholder="nhập name"
+            placeholder="Nhập name"
           />
         </Form.Item>
         <Form.Item
@@ -101,7 +101,7 @@ const SignupPage = () => {
         >
           <Input
             className="font-mono border border-indigo-600 h-10"
-            placeholder="nhập email"
+            placeholder="Nhập email"
           />
         </Form.Item>
         <Form.Item
@@ -110,7 +110,7 @@ const SignupPage = () => {
           label="mật khẩu"
           rules={[
             {
-              message: "vui lòng nhập password!",
+              message: "Vui lòng nhập password!",
               required: true,
               min: 6,
             },
@@ -119,7 +119,7 @@ const SignupPage = () => {
           <Input.Password
             type="password"
             className="font-mono border border-indigo-600 h-10"
-            placeholder="nhập password"
+            placeholder="Nhập password"
             iconRender={(visible) =>
               visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />
             }
@@ -128,10 +128,10 @@ const SignupPage = () => {
         <Form.Item
           className="text-black font-bold"
           name="confirmpassword"
-          label="nhập lại mật khẩu"
+          label="Nhập lại mật khẩu"
           rules={[
             {
-              message: "vui lòng nhập confirm password!",
+              message: "Vui lòng nhập lại password!",
               required: true,
               min: 6,
             },
@@ -140,7 +140,7 @@ const SignupPage = () => {
           <Input.Password
             type="password"
             className="font-mono border border-indigo-600 h-10"
-            placeholder="nhập password"
+            placeholder="Nhập password"
             iconRender={(visible) =>
               visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />
             }
@@ -163,7 +163,7 @@ const SignupPage = () => {
         </Form.Item>
         <Button
           htmlType="submit"
-          className="w-full h-[52px] text-center py-3 rounded bg-[#4a71c4] text-white hover:bg-green-dark focus:outline-none my-1"
+          className="w-full h-[52px] text-center py-3 rounded-xl bg-[black] text-white hover:bg-green-dark focus:outline-none my-1"
         >
           Sign up
         </Button>

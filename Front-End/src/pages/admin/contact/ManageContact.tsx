@@ -1,17 +1,16 @@
 import { Table, Button, Empty, message, Modal } from 'antd';
 import { useEffect, useState } from 'react';
-import IUser from '../../../types/user';
 import { DeleteOutlined } from "@ant-design/icons"
-import { GetAllUser, RemoveUser } from '../../../services/user';
-import { formatDate } from '../../../utils/DateUtils';
+import IContact from '../../../types/contact';
+import { GetAllContact, RemoveContact } from '../../../services/contact';
 
-const ManageUser = () => {
-  const [users, setusers] = useState<IUser[]>([])
+const ManageContact = () => {
+  const [contacts, setcontacts] = useState<IContact[]>([])
   useEffect(() => {
-    GetAllUser().then(({ data }) => setusers(data))
+    GetAllContact().then(({ data }) => setcontacts(data))
   }, [])
 
-  const HandleRemoveUser = async (id: string) => {
+  const HandleRemoveContact = async (_id: string) => {
     try {
       Modal.confirm({
         title: 'Confirm',
@@ -27,11 +26,11 @@ const ManageUser = () => {
             if (loading) {
               loading();
             }
-            const response = await RemoveUser(id);
+            const response = await RemoveContact(_id);
             if (response) {
-              message.success('xóa người dùng thành công!', 3);
-              const dataNew = users.filter((data) => data._id !== id);
-              setusers(dataNew);
+              message.success('xóa liên hệ thành công!', 3);
+              const dataNew = contacts.filter((data) => data._id !== _id);
+              setcontacts(dataNew);
             }
           }, 2000);
         },
@@ -45,47 +44,49 @@ const ManageUser = () => {
   };
   const columns = [
     {
-      title: 'stt',
-      dataIndex: 'index',
-      key: 'index'
+      title: 'STT',
+      dataIndex: 'index', 
+      key: 'index+1'
     },
     {
-      title: 'name',
+      title: 'SĐT',
+      dataIndex: 'phone',
+      key: 'phone'
+    },
+    {
+      title: 'THÀNH VIÊN',
       dataIndex: 'name',
       key: 'name'
+    }, 
+    {
+      title: 'ĐỊA CHỈ',
+      dataIndex: 'address',
+      key: 'address'
     },
     {
-      title: 'email',
-      dataIndex: 'email',
-      key: 'email'
+      title: 'HỖ TRỢ',
+      dataIndex: 'support',
+      key: 'support'
     },
     {
-      title: 'role',
-      dataIndex: 'role',
-      key: 'role'
-    },
-    {
-      title: "Ngày tạo",
-      dataIndex: "createdAt",
-      key: "createdAt",
-      render: (createdAt: any) => formatDate(createdAt),
-    },
-    {
-      title: "Hành động",
-      render: (item: IUser) => <>
+      title: 'HÀNH ĐỘNG',
+      render: (item: IContact) => <>
         {item.role === 'admin' ? <Button hidden>delete</Button> :
-          <button className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded" onClick={() => HandleRemoveUser(item.key)} ><DeleteOutlined /></button>
+          <button className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded" onClick={() => HandleRemoveContact(item._id)} ><DeleteOutlined /></button>
         }
       </>
     },
   ];
 
-  const data = users.map((item: IUser, index: number) => {
+  const data = contacts.map((item: IContact, index: number) => {
     return {
-      index: index + 1,
+      index: index,
       key: item._id,
       name: item.name,
       email: item.email,
+      phone: item.phone,
+      address: item.address,
+      support: item.support,
       role: item.role,
       createdAt: item.createdAt,
     }
@@ -106,4 +107,4 @@ const ManageUser = () => {
   )
 }
 
-export default ManageUser
+export default ManageContact

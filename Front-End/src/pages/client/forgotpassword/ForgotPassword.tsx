@@ -43,14 +43,14 @@ const ForgotPassword = () => {
                 try {
                     const loading = await message.loading({ content: 'loading!', key, duration: 2 })
                     if (loading) {
-                        const response = await ForgotPass(value);
+                        const response:any = await ForgotPass(value);
                         if (response) {
-                            message.success('successfully forgotpassword', 3);
+                            message.success(response.message, 3);
                             navigate('/')
                         }
                     }
-                } catch (error) {
-                    message.error('forgotpassword failed', 5);
+                } catch (error:any) {
+                    message.error(error.response.data.message, 5);
                 }
             }
         }
@@ -92,7 +92,7 @@ const ForgotPassword = () => {
                     </MyFormItem>
                     <Button
                         htmlType="submit"
-                        className="w-full h-[52px] text-center py-3 rounded bg-[#4a71c4] text-white hover:bg-green-dark focus:outline-none my-1"
+                        className="w-full h-[52px] text-center py-3 rounded-xl bg-[black] text-white hover:bg-green-dark focus:outline-none my-1"
                     >
                         Forgot password
                     </Button>

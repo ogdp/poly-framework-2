@@ -9,16 +9,16 @@ const FooterLayoutClient = () => {
                 <div className="mt-4 md:mt-0 md:text-right">
                     <ul className="w-full space-x-8 md:space-x-12 items-center flex flex-wrap text-center md:text-right">
                         <li className="pb-3">
-                            <Link to='/' className="text-sm text-gray-700 hover:text-blue-400 font-bold dark:text-gray-400">Home</Link>
+                            <Link to='/' className="text-sm text-gray-700 hover:text-blue-400 font-bold dark:text-gray-400">Trang chủ</Link>
                         </li>
                         <li className="pb-3">
-                            <Link to='/products' className="text-sm text-gray-700 hover:text-blue-400 font-bold dark:text-gray-400">Products</Link>
+                            <Link to='/products' className="text-sm text-gray-700 hover:text-blue-400 font-bold dark:text-gray-400">Sản phẩm</Link>
                         </li>
                         <li className="pb-3">
-                            <Link to='/products/sales' className="text-sm text-[red] font-bold">News Sale</Link>
+                            <Link to='/products/sales' className="text-sm text-[red] font-bold">Sản phẩm sale</Link>
                         </li>
                         <li className="pb-3">
-                            <Link to='/contacts' className="text-sm text-gray-700 hover:text-blue-400 font-bold dark:text-gray-400">Contacts</Link>
+                            <Link to='/contacts' className="text-sm text-gray-700 hover:text-blue-400 font-bold dark:text-gray-400">Liên hệ</Link>
                         </li>
                     </ul>
                 </div>

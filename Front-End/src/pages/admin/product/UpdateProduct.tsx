@@ -36,6 +36,7 @@ const UpdateProduct = () => {
       form.setFieldsValue({
         name: data?.name,
         price: data.price,
+        salePrice: data?.salePrice | 0,
         CategoryId: data.CategoryId[0]._id,
         description: data.description,
         sizes: data.sizes,
@@ -49,18 +50,15 @@ const UpdateProduct = () => {
 
   let fileListCore: any = 0;
   const beforeUpload = (e: any) => {
-    // console.log(e.target.files);
     fileListCore = e.target.files;
     return true;
   };
   const onFinish = async (values: any) => {
-    // console.log("after ::: ", values);
     if (fileListCore?.length > 0) {
       try {
         message.loading("Tải lên hình ảnh", 2, () => {});
         const formData = new FormData();
         for (const item of fileListCore) {
-          // console.log(item);
           formData.append("images", item);
         }
         const { data } = await axios.post(
@@ -68,11 +66,9 @@ const UpdateProduct = () => {
           formData
         );
         values.images = data.urls;
-        // console.log("before value ::: ", values);
         return updateProductNow(values);
       } catch (error) {
         message.error("Tải ảnh lên thất bại", 2, () => {});
-        // console.log("Tải ảnh lên thất bại ::: ", error);
         return;
       }
     }
@@ -125,7 +121,8 @@ const UpdateProduct = () => {
       }
     }
   };
-  const onFinishFailed = () => {
+  const onFinishFailed = (value: any) => {
+    console.log(value);
     setFormFail(1);
   };
   const validatePrice = (_: any, value: number) => {
@@ -189,6 +186,13 @@ const UpdateProduct = () => {
             { required: true, message: "Vui lòng nhập giá sản phẩm" },
             { validator: validatePrice },
           ]}
+        >
+          <InputNumber min={0} style={{ width: "100%" }} />
+        </Form.Item>
+        <Form.Item
+          label="Giảm giá"
+          name="salePrice"
+          rules={[{ validator: validatePrice }]}
         >
           <InputNumber min={0} style={{ width: "100%" }} />
         </Form.Item>

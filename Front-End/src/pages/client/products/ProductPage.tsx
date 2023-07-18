@@ -49,7 +49,7 @@ const ProductPage = () => {
   if (loading) return <div>Loading ...</div>;
   return (
     <section>
-      <aside className="max-w-[1170px] m-auto max-sm:py-3">
+      <aside className="w-full m-auto max-sm:py-3">
         <img
           src="https://file.hstatic.net/1000376021/file/1920x720_copy__4___1__451089634ed34e8d9332d622db6c9c0d.png"
           alt=""
@@ -58,7 +58,7 @@ const ProductPage = () => {
       <aside className="md:flex max-w-[1170px] w-full m-auto md:py-7">
         <div className="order-1 md:w-3/12">
           <div>
-            <h3 className="text-2xl font-bold">Danh mục</h3>
+            <h3 className="md:text-2xl text-lg font-bold">Danh mục</h3>
           </div>
           <div className="py-3">
             <Link to={`/products`}>
@@ -83,7 +83,7 @@ const ProductPage = () => {
         <div className="order-2 md:w-3/4">
           <div className="flex justify-between">
             <div>
-              <h3 className="text-2xl font-bold">Tất cả sản phẩm</h3>
+              <h3 className="md:text-2xl text-lg font-bold">Tất cả sản phẩm</h3>
             </div>
             <div>
               <select
