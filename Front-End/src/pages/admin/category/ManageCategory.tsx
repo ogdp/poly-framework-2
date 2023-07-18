@@ -118,7 +118,7 @@ const ManageCategory = () => {
         columns={columns}
         dataSource={data}
         bordered
-        pagination={{ pageSize: 5, showQuickJumper: true }}
+        pagination={{ pageSize: 8, showQuickJumper: true }}
       />
     </>
   );

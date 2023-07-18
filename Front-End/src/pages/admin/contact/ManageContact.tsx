@@ -1,41 +1,45 @@
-import { Table, Button, Empty, message, Modal } from 'antd';
-import { useEffect, useState } from 'react';
-import { DeleteOutlined } from "@ant-design/icons"
-import IContact from '../../../types/contact';
-import { GetAllContact, RemoveContact } from '../../../services/contact';
+import { Table, Button, Empty, message, Modal } from "antd";
+import { useEffect, useState } from "react";
+import { DeleteOutlined } from "@ant-design/icons";
+import IContact from "../../../types/contact";
+import { GetAllContact, RemoveContact } from "../../../services/contact";
 
 const ManageContact = () => {
-  const [contacts, setcontacts] = useState<IContact[]>([])
+  const [contacts, setcontacts] = useState<IContact[]>([]);
   useEffect(() => {
-    GetAllContact().then(({ data }) => setcontacts(data))
-  }, [])
+    GetAllContact().then(({ data }) => setcontacts(data));
+  }, []);
 
   const HandleRemoveContact = async (_id: string) => {
     try {
       Modal.confirm({
-        title: 'Confirm',
-        content: 'Are you sure you want to delete this about?',
-        okText: 'Yes',
-        cancelText: 'No',
+        title: "Confirm",
+        content: "Are you sure you want to delete this about?",
+        okText: "Yes",
+        cancelText: "No",
         okButtonProps: {
-          className: "bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded" // áp dụng lớp CSS
+          className:
+            "bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded", // áp dụng lớp CSS
         },
         onOk: async () => {
-          const loading = message.loading({ content: 'Loading...', duration: 0 });
+          const loading = message.loading({
+            content: "Loading...",
+            duration: 0,
+          });
           setTimeout(async () => {
             if (loading) {
               loading();
             }
             const response = await RemoveContact(_id);
             if (response) {
-              message.success('xóa liên hệ thành công!', 3);
+              message.success("xóa liên hệ thành công!", 3);
               const dataNew = contacts.filter((data) => data._id !== _id);
               setcontacts(dataNew);
             }
           }, 2000);
         },
         onCancel: () => {
-          message.success('Canceled!');
+          message.success("Canceled!");
         },
       });
     } catch (error: any) {
@@ -44,37 +48,57 @@ const ManageContact = () => {
   };
   const columns = [
     {
-      title: 'STT',
-      dataIndex: 'index',
-      key: 'index+1'
+      title: "STT",
+      dataIndex: "index",
+      key: "index+1",
     },
     {
-      title: 'SĐT',
-      dataIndex: 'phone',
-      key: 'phone'
+      title: "SĐT",
+      dataIndex: "tel",
+      key: "tel",
     },
     {
-      title: 'THÀNH VIÊN',
-      dataIndex: 'name',
-      key: 'name'
+      title: "THÀNH VIÊN",
+      dataIndex: "name",
+      key: "name",
     },
     {
-      title: 'ĐỊA CHỈ',
-      dataIndex: 'address',
-      key: 'address'
+      title: "ĐỊA CHỈ",
+      dataIndex: "address",
+      key: "address",
     },
     {
-      title: 'HỖ TRỢ',
-      dataIndex: 'support',
-      key: 'support'
+      title: "NỘI DUNG",
+      dataIndex: "message",
+      render: (t: any, r: any) => {
+        return (
+          <span className="text-center line-clamp-3 hover:line-clamp-6 max-w-sm">
+            {r.message}
+          </span>
+        );
+      },
     },
     {
-      title: 'HÀNH ĐỘNG',
-      render: (item: IContact) => <>
-        {item.role === 'admin' ? <Button hidden>delete</Button> :
-          <button className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded" onClick={() => HandleRemoveContact(item._id)} ><DeleteOutlined /></button>
-        }
-      </>
+      title: "EMAIL",
+      dataIndex: "email",
+      key: "email",
+    },
+    {
+      title: "HÀNH ĐỘNG",
+      render: (item: IContact) => (
+        <>
+          {item.role === "admin" ? (
+            <Button hidden>delete</Button>
+          ) : (
+            <button
+              className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
+              onClick={() => HandleRemoveContact(item._id)}
+            >
+              <DeleteOutlined />
+            </button>
+          )}
+        </>
+      ),
     },
   ];
 
@@ -85,27 +109,24 @@ const ManageContact = () => {
       key: item._id,
       name: item.name,
       email: item.email,
-      phone: item.phone,
+      tel: item.tel,
       address: item.address,
-      support: item.support,
+      message: item.message,
       role: item.role,
       createdAt: item.createdAt,
-    }
-  })
-  if (data.length == 0)
-    return (
-      <Empty description={false} />
-    )
+    };
+  });
+  if (data.length == 0) return <Empty description={false} />;
   return (
     <>
       <Table
         columns={columns}
         dataSource={data}
         bordered
-        pagination={{ pageSize: 4, showQuickJumper: true }}
+        pagination={{ pageSize: 8, showQuickJumper: true }}
       />
     </>
-  )
-}
+  );
+};
 
-export default ManageContact
+export default ManageContact;
