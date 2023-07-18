@@ -33,7 +33,7 @@ const ListProductByCategories = () => {
                                             </div>
                                             <div className="p-5 bg-gray-50 dark:bg-gray-900">
                                                 <div className="flex items-center justify-between mb-4">
-                                                    <h3 className="text-xl font-medium dark:text-gray-400"> <br />
+                                                    <h3 className="text-xl font-medium dark:text-gray-400 truncate"> <br />
                                                         {product.name}
                                                     </h3>
                                                 </div>
