@@ -79,14 +79,14 @@ const ClientPageCart = () => {
       const dataCore: any = window.localStorage.getItem("user");
       const userJSON = JSON.parse(dataCore);
       if (!userJSON) {
-        message.warning("Đăng nhập để đặt hàng", 15000, () => {});
+        message.warning("Đăng nhập để đặt hàng", 2, () => {});
         return navigate("/signin");
       }
       const { data } = await GetOneUser(userJSON._id);
       setUser(data);
     } catch (error) {
       console.log(error);
-      message.warning("Đăng nhập để đặt hàng", 15000, () => {});
+      message.warning("Đăng nhập để đặt hàng", 2, () => {});
       return navigate("/signin");
     }
   };

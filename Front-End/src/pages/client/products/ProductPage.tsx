@@ -108,6 +108,7 @@ const ProductPage = () => {
                   _id={product._id}
                   name={product.name}
                   price={product.price}
+                  salePrice={product.salePrice}
                   imageUrl={product.images[0]}
                 />
               ))}
