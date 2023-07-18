@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom'
 import { EyeInvisibleOutlined } from "@ant-design/icons"
 import useFetchData from '../../hooks/useFetchData';
 import { ICategory } from '../../types/category';
+import { formatMoney } from '../../utils/MoneyUtils';
 
 const ListProductByCategories = () => {
     const { data: categories } = useFetchData("/categories");
@@ -32,20 +33,19 @@ const ListProductByCategories = () => {
                                             </div>
                                             <div className="p-5 bg-gray-50 dark:bg-gray-900">
                                                 <div className="flex items-center justify-between mb-4">
-                                                    <h3 className="text-xl font-medium dark:text-gray-400 truncate">
+                                                    <h3 className="text-xl font-medium dark:text-gray-400 truncate"> <br />
                                                         {product.name}
                                                     </h3>
-
                                                 </div>
                                                 <div className="flex items-center justify-between">
                                                     <div className='mb-4'>
                                                         <p className="text-lg ">
                                                             <span className="text-red-400 dark:text-gray-400">
-                                                                ${product.price}
-                                                            </span>
-                                                            {product.salePrice == undefined ? <span className="ml-2 text-gray-400 line-through dark:text-gray-400">
-                                                            </span> : <span className="ml-2 text-gray-400 line-through dark:text-gray-400">
-                                                                ${product.salePrice}
+                                                                {formatMoney(product.salePrice)}
+                                                            </span> <br />
+                                                            {product.salePrice < 0 ? <span className=" text-gray-400 line-through dark:text-gray-400">
+                                                            </span> : <span className="text-gray-400 dark:text-gray-400">
+                                                                giá gốc: {formatMoney(product.price)}
                                                             </span>}
                                                         </p>
                                                     </div>

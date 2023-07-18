@@ -45,7 +45,7 @@ const ManageContact = () => {
   const columns = [
     {
       title: 'STT',
-      dataIndex: 'index', 
+      dataIndex: 'index',
       key: 'index+1'
     },
     {
@@ -57,7 +57,7 @@ const ManageContact = () => {
       title: 'THÀNH VIÊN',
       dataIndex: 'name',
       key: 'name'
-    }, 
+    },
     {
       title: 'ĐỊA CHỈ',
       dataIndex: 'address',
@@ -80,7 +80,8 @@ const ManageContact = () => {
 
   const data = contacts.map((item: IContact, index: number) => {
     return {
-      index: index,
+      index: index + 1,
+      _id: item._id,
       key: item._id,
       name: item.name,
       email: item.email,
