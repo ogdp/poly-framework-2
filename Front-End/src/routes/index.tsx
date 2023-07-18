@@ -20,7 +20,12 @@ import ManageCategory from "../pages/admin/category";
 import EditCategory from "../pages/admin/category/EditCategory";
 import AddCategory from "../pages/admin/category/AddCategory";
 import ManageComment from "../pages/admin/comment/ManageComments";
+import ManageContact from "../pages/admin/contact/ManageContact";
 import ClientPageBill from "../pages/client/bill/ClientPageBill";
+import TermOfServicePage from "../pages/client/tos/service/TermOfServicePage";
+import WarrantyPage from "../pages/client/tos/warranty/WarrantyPage";
+import RulePage from "../pages/client/tos/rules/RulePage";
+import ReturnPage from "../pages/client/tos/return/ReturnPage";
 
 const Router = () => {
   return (
@@ -31,6 +36,12 @@ const Router = () => {
           <Route path="products">
             <Route index element={<ProductPage />} />
             <Route path=":id" element={<ProductDetailPage />} />
+          </Route>
+          <Route path="tos">
+            <Route index element={<TermOfServicePage />} />
+            <Route path="warranty" element={<WarrantyPage />} />
+            <Route path="rule" element={<RulePage />} />
+            <Route path="return" element={<ReturnPage />} />
           </Route>
           <Route path="products/sales">
             <Route index element={<ProductSale />} />
@@ -54,6 +65,9 @@ const Router = () => {
           </Route>
           <Route path="comments">
             <Route index element={<ManageComment />} />
+          </Route>
+          <Route path="contacts">
+            <Route index element={<ManageContact />} />
           </Route>
 
           {/* <Route index element={<Management />} />

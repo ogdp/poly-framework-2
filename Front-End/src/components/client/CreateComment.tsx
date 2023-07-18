@@ -22,8 +22,11 @@ const CreateComment = () => {
       if (loading) {
         const Data: IComment = {
           content: value.content,
-          User_id: userParse._id,
-          Product_id: id,
+          Product: value.Product,
+          name: value.name,
+          User_id: userParse.User_id,
+          Product_id: userParse.Product_id, 
+          role: "admin"
         };
         if (Data) {
           try {

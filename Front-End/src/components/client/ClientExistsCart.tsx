@@ -5,8 +5,14 @@ import { formatMoney } from "../../utils/MoneyUtils";
 type Props = {
   data: undefined | any;
   onHandleRemoveItemCart(id: string): void;
+  onHandleCheckouts(e: any, valNote: String): void;
 };
-const ClientExistsCart = ({ data, onHandleRemoveItemCart }: Props) => {
+const ClientExistsCart = ({
+  data,
+  onHandleRemoveItemCart,
+  onHandleCheckouts,
+}: Props) => {
+  const [note, setNote] = useState<String>("");
   if (data?.length > 0) {
     const [sumMoney, setSumMoney] = useState<Number>(0);
     let sum = 0;
@@ -17,6 +23,10 @@ const ClientExistsCart = ({ data, onHandleRemoveItemCart }: Props) => {
         return false;
       });
     }, [data]);
+    function onHandleSubmit(e: any) {
+      e.preventDefault();
+      onHandleCheckouts(e, note);
+    }
     return (
       <div className="">
         <h3 className="text-center my-4 text-gray-500">
@@ -62,7 +72,7 @@ const ClientExistsCart = ({ data, onHandleRemoveItemCart }: Props) => {
             );
           })}
 
-          <form action="">
+          <form onSubmit={onHandleSubmit}>
             <div className="flex max-md:flex-col md:justify-between md:items-center md:py-5 md:px-[10%]">
               <div className="max-md:order-1 max-md:w-full max-md:my-3">
                 <textarea
@@ -71,6 +81,7 @@ const ClientExistsCart = ({ data, onHandleRemoveItemCart }: Props) => {
                   cols={60}
                   placeholder="Ghi chú"
                   x-ref="textarea"
+                  onChange={(e) => setNote(e.target.value)}
                 ></textarea>
               </div>
               <div className="max-md:order-2 max-md:w-full max-md:py-3">

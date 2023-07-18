@@ -1,6 +1,7 @@
 import express from "express";
 import { checkPermission } from "../middlewares/CheckPermission.js";
 import {
+  AdGetAllComment,
   createComment,
   getAllComment,
   getCommentByProducts,
@@ -11,6 +12,7 @@ import {
 const RouterComment = express.Router();
 
 RouterComment.get("/", getAllComment);
+RouterComment.get("/ad/", AdGetAllComment);
 RouterComment.get("/:id", getOneComment);
 RouterComment.get("/product/:Product_id", getCommentByProducts);
 RouterComment.post("/", createComment);

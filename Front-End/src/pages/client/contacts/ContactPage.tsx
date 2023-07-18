@@ -3,6 +3,7 @@ import { useReducer, useState } from "react";
 import { Button, Form, Input } from "antd";
 import { EyeInvisibleOutlined, EyeTwoTone } from "@ant-design/icons";
 import { message } from "antd";
+import { CreateContact } from "../../../services/contact";
 const ContactPage = () => {
   const { TextArea } = Input;
   const [form] = Form.useForm();
@@ -12,20 +13,22 @@ const ContactPage = () => {
   // } | null>(null);
   const handleSubmit = async () => {
     const values = form.getFieldsValue();
-    console.log("Form data:", values);
+    console.log(values);
     // if (formValid.isValidExtract && formValid.isValidTitle) {
-    //   try {
-    //     await createFilm(formData);
-    //     setMessageContent({
-    //       message: "Thêm mới thành công",
-    //       type: "success",
-    //     });
-    //   } catch (err: any) {
-    //     setMessageContent({
-    //       message: err.message,
-    //       type: "error",
-    //     });
-    //   }
+    try {
+      await CreateContact(values);
+      // setMessageContent({
+      //   message: "Thêm mới thành công",
+      //   type: "success",
+      // });
+      alert("Thành công");
+    } catch (err: any) {
+      // setMessageContent({
+      //   message: err.message,
+      //   type: "error",
+      // });
+      alert(err);
+    }
     // }
   };
   return (
@@ -120,6 +123,22 @@ const ContactPage = () => {
               </Form.Item>
               <Form.Item
                 className="text-black font-bold"
+                name="address"
+                label="Địa chỉ"
+                rules={[
+                  {
+                    message: "Vui lòng nhập địa chỉ!",
+                    required: false,
+                  },
+                ]}
+              >
+                <Input
+                  className="font-mono border border-indigo-600 h-10"
+                  placeholder="Địa chỉ ..."
+                />
+              </Form.Item>
+              <Form.Item
+                className="text-black font-bold"
                 name="tel"
                 label="Điện thoại"
                 rules={[
@@ -143,12 +162,16 @@ const ContactPage = () => {
                 rules={[
                   {
                     message: "Nhập tin nhắn!",
-                    required: true,
+                    required: false,
                     min: 6,
                   },
                 ]}
               >
-                <TextArea rows={4} placeholder="Nội dung" maxLength={6} />
+                <TextArea
+                  rows={4}
+                  placeholder="Nội dung tin nhắn"
+                  maxLength={30}
+                />
               </Form.Item>
 
               <Button
