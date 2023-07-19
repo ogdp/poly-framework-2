@@ -6,8 +6,10 @@ import { Link } from "react-router-dom";
 import { ICategory } from "../../../types/category";
 import { IProduct } from "../../../types/product";
 import { GetOneCategory } from "../../../services/categories";
+import { Pagination } from "antd";
 const ProductPage = () => {
   const [products, setProducts] = useState([]);
+  const [currentPage, setCurrentPage] = useState<number>(9);
   const [category, setCategory] = useState([]);
   const [loading, setLoading] = useState(true);
   useEffect(() => {
@@ -46,6 +48,18 @@ const ProductPage = () => {
       console.log(error);
     }
   }
+  // pagination
+  const [productsPerPage, setProductsPerPage] = useState(9);
+  const indexOfLastProduct = currentPage * productsPerPage;
+  const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
+  const currentProducts = products.slice(
+    indexOfFirstProduct,
+    indexOfLastProduct
+  );
+
+  const handleChangePage = (page: number) => {
+    setCurrentPage(page);
+  };
   if (loading) return <div>Loading ...</div>;
   return (
     <section>
@@ -102,7 +116,7 @@ const ProductPage = () => {
           </div>
           {products.length > 0 ? (
             <section className="grid md:grid-cols-3 max-sm:grid-cols-1 gap-7 py-4">
-              {products?.map((product: IProduct, index) => (
+              {currentProducts?.map((product: IProduct, index) => (
                 <ClientProductCard
                   key={index}
                   _id={product._id}
@@ -112,6 +126,23 @@ const ProductPage = () => {
                   imageUrl={product.images[0]}
                 />
               ))}
+              <Pagination
+                className="mt-8"
+                current={currentPage}
+                pageSize={productsPerPage}
+                total={products.length}
+                onChange={handleChangePage}
+              />
+
+              {/* <Pagination
+                total={Math.floor(products.length / 10) + 1}
+                showSizeChanger
+                showQuickJumper
+                showTotal={(total) => {
+                  return `Total ${total} items`;
+                }}
+                onChange={handlePageChange}
+              /> */}
             </section>
           ) : (
             <div className="w-full text-center">
