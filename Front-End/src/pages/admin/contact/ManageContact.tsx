@@ -59,6 +59,11 @@ const ManageContact = () => {
       key: 'name'
     }, 
     {
+      title: 'GMAIL',
+      dataIndex: 'email',
+      key: 'email'
+    },
+    {
       title: 'ĐỊA CHỈ',
       dataIndex: 'address',
       key: 'address'

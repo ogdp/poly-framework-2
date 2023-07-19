@@ -18,6 +18,7 @@ import EditCategory from "../pages/admin/category/EditCategory";
 import AddCategory from "../pages/admin/category/AddCategory";
 import ManageComment from "../pages/admin/comment/ManageComments";
 import ManageContact from "../pages/admin/contact/ManageContact";
+import BillSuccess from "../pages/client/cart-succes/BillSuccess";
 
 const Router = () => {
   return (
@@ -35,6 +36,7 @@ const Router = () => {
           <Route path="contacts" element={<ContactPage />} />
           <Route path="profiles" element={<ProfilesPage />} />
           <Route path="cart" element={<ClientPageCart />} />
+          <Route path="billsuccess/:id" element={<BillSuccess />} />
         </Route>
         <Route path="admin" element={<LayoutAdmin />}>
           <Route index element={<Dashboard />} />

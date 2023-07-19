@@ -1,4 +1,5 @@
 interface IBill {
+  map(arg0: (item: any) => import("react/jsx-runtime").JSX.Element): import("react").ReactNode;
   _id: string;
   key: string;
   name: string;
@@ -15,6 +16,7 @@ interface IBill {
 }
 
 export interface Itembill {
+  [x: string]: any;
   _id: string;
   image: string;
   name: string;
