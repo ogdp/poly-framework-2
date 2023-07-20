@@ -1,4 +1,4 @@
-import { Table, Button, Empty, message, Modal } from "antd";
+import { Table, Empty, message, Modal } from "antd";
 import { useEffect, useState } from "react";
 import { DeleteOutlined } from "@ant-design/icons";
 import IComment from "../../../types/comment";
@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 import { formatDate } from "../../../utils/DateUtils";
 
 const ManageComment = () => {
-  const [coments, setcoments] = useState<any>([]);
+  const [comments, setcoments] = useState<any>([]);
   useEffect(() => {
     AdGetAllComment().then(({ data }) => setcoments(data));
   }, []);
@@ -35,7 +35,7 @@ const ManageComment = () => {
             const response = await RemoveComment(_id);
             if (response) {
               message.success("Xóa bình luận thành công!", 3);
-              const dataNew = coments.filter((data: any) => data._id !== _id);
+              const dataNew = comments.filter((data: any) => data._id !== _id);
               setcoments(dataNew);
             }
           }, 2000);
@@ -83,24 +83,22 @@ const ManageComment = () => {
       title: "HÀNH ĐỘNG",
       render: (item: IComment) => (
         <>
-          {item.role === "admin" ? (
-            <Button hidden>delete</Button>
-          ) : (
-            <button
-              className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
-              onClick={() => HandleRemoveComment(item._id)}
-            >
-              <DeleteOutlined />
-            </button>
-          )}
+
+          <button
+            className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
+            onClick={() => HandleRemoveComment(item._id)}
+          >
+            <DeleteOutlined />
+          </button>
         </>
       ),
     },
   ];
 
-  const data = coments.map((item: any, index: number) => {
+  const data = comments.map((item: any, index: number) => {
     return {
       index: index + 1,
+      _id: item._id,
       key: item._id,
       nameProduct: item.product.name,
       nameUser: item.user.name,
