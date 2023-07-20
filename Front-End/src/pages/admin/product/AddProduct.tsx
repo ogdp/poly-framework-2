@@ -25,7 +25,6 @@ const AddProduct = () => {
   const [categories, setCategories] = useState<ICategory[] | undefined>(
     undefined
   );
-  const [timeLoadAlert, setTimeLoadAlert] = useState<number>(10000000);
   const [messageApi, contextHolder] = message.useMessage();
   const [formFail, setFormFail] = useState<number>(0);
   useEffect(() => {
@@ -39,52 +38,41 @@ const AddProduct = () => {
   const onFinish = async (values: any) => {
     setFormFail(0);
     try {
-      // messageApi.open({
-      //   key: 1,
-      //   type: "loading",
-      //   content: "Loading...",
-      // });
-      message.loading("Loadding...", 1000000, () => {});
-      setTimeout(() => {
-        message.destroy();
-        messageApi.open({
-          key: 1,
-          type: "success",
-          content: "Thêm sản phẩm thành công!",
-          duration: 2,
-        });
-      }, timeLoadAlert);
       const formData = new FormData();
       for (const item of values.images.fileList) {
         formData.append("images", item.originFileObj);
       }
+      message.loading("Tải ảnh lên ....", 2000000, () => {});
       const { data } = await axios.post(
         "https://api-poly-framework-1-5plp.onrender.com/api/images/upload",
         formData
       );
       if (data && data.urls.length > 0) {
         values.images = data.urls;
+        message.destroy();
+        message.loading("Vui lòng chờ ....", 2000000, () => {});
         try {
           const res = await CreateProduct(values);
-          message.destroy();
           if (res) {
-            setTimeLoadAlert(0);
+            message.destroy();
             message.success("Thêm sản phẩm thành công", 2, () => {
               navigate("/admin/products");
             });
           } else {
-            setTimeLoadAlert(0);
+            message.destroy();
             message.error("Thêm sản phẩm thất bại", 2, () => {
               navigate("/admin/products");
             });
           }
         } catch (error) {
-          setTimeLoadAlert(0);
+          message.destroy();
           message.error("Thêm sản phẩm thất bại", 2, () => {});
         }
       }
     } catch (error) {
       console.log(error);
+      message.destroy();
+      message.error("Lỗi tải lên hình ảnh ...", 2, () => {});
     }
   };
 

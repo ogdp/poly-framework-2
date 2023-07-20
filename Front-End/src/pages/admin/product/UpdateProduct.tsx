@@ -27,7 +27,6 @@ const UpdateProduct = () => {
     undefined
   );
   const [product, setProduct] = useState<IProduct | undefined>(undefined);
-  const [timeLoadAlert, setTimeLoadAlert] = useState<number>(10000000);
   const [messageApi, contextHolder] = message.useMessage();
   const [formFail, setFormFail] = useState<number>(0);
   useEffect(() => {
@@ -55,8 +54,8 @@ const UpdateProduct = () => {
   };
   const onFinish = async (values: any) => {
     if (fileListCore?.length > 0) {
+      message.loading("Tải ảnh lên ....", 2000000, () => {});
       try {
-        message.loading("Tải lên hình ảnh", 2, () => {});
         const formData = new FormData();
         for (const item of fileListCore) {
           formData.append("images", item);
@@ -65,9 +64,11 @@ const UpdateProduct = () => {
           "https://api-poly-framework-1-5plp.onrender.com/api/images/upload",
           formData
         );
-        values.images = data.urls;
+        values.images = await data.urls;
+        message.destroy();
         return updateProductNow(values);
       } catch (error) {
+        message.destroy();
         message.error("Tải ảnh lên thất bại", 2, () => {});
         return;
       }
@@ -75,20 +76,8 @@ const UpdateProduct = () => {
     updateProductNow(values);
     async function updateProductNow(values: IProduct | any) {
       setFormFail(0);
+      message.loading("Vui lòng chờ ...", 2000000, () => {});
       try {
-        messageApi.open({
-          key: 1,
-          type: "loading",
-          content: "Loading...",
-        });
-        setTimeout(() => {
-          messageApi.open({
-            key: 1,
-            type: "success",
-            content: "Cập nhật sản phẩm thành công!",
-            duration: 2,
-          });
-        }, timeLoadAlert);
         const newSize = values.sizes.map(
           (item: { size?: string; quantity: number; _id?: string }) => {
             delete item?._id;
@@ -100,12 +89,12 @@ const UpdateProduct = () => {
           if (values && values !== undefined) {
             const res = await APIUpdateProduct(values, String(id));
             if (res) {
-              setTimeLoadAlert(0);
+              message.destroy();
               message.success("Cập nhật sản phẩm thành công", 2, () => {
                 navigate("/admin/products");
               });
             } else {
-              setTimeLoadAlert(0);
+              message.destroy();
               message.error("Cập nhật sản phẩm thất bại", 2, () => {
                 navigate("/admin/products");
               });
@@ -113,10 +102,11 @@ const UpdateProduct = () => {
           }
         } catch (error) {
           console.log(error);
-          setTimeLoadAlert(0);
+          message.destroy();
           message.error("Cập nhật sản phẩm thất bại", 2, () => {});
         }
       } catch (error) {
+        message.destroy();
         console.log(error);
       }
     }

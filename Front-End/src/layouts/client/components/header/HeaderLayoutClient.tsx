@@ -1,6 +1,10 @@
 import { useEffect, useContext } from "react";
-import { Badge } from "antd";
-import { ShoppingCartOutlined, UserOutlined, LogoutOutlined } from "@ant-design/icons";
+import { Badge, message } from "antd";
+import {
+  ShoppingCartOutlined,
+  UserOutlined,
+  LogoutOutlined,
+} from "@ant-design/icons";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { ICartItem } from "../../../../types/cart";
@@ -10,15 +14,17 @@ export default function HeaderLayoutClient() {
   const [show, setshow] = useState(false);
   const [sumCart, setSumCart] = useState(0);
   const [showDropdown, setShowDropdown] = useState(false);
-  const user = localStorage.getItem('user');
+  const user = localStorage.getItem("user");
 
   function handleDropdownClick() {
     setShowDropdown(!showDropdown);
   }
 
-  function handleLogout() {
+  async function handleLogout() {
     // Implement logout logic here
-    localStorage.removeItem('user');
+    localStorage.removeItem("user");
+    await message.warning("Đã đăng xuất", 2, () => {});
+    window.location.reload();
   }
   useEffect(() => {
     setSumCart(Number(sumCartContext?.value));
@@ -125,20 +131,30 @@ export default function HeaderLayoutClient() {
               <button className="text-gray-800" onClick={handleDropdownClick}>
                 <UserOutlined
                   style={{ fontSize: "24px" }}
-                  className="h-8 w-8 transform hover:scale-110 transition duration-200" />
+                  className="h-8 w-8 transform hover:scale-110 transition duration-200"
+                />
               </button>
               {showDropdown && (
-               <div className="absolute right-0 mt-2 bg-white shadow-md rounded-md overflow-hidden z-10 w-48">
-               <Link to="/profiles" className="block px-4 py-2 text-gray-800 hover:bg-gray-200">
-                 Profile
-               </Link>
-               <Link to="/mybill" className="block px-4 py-2 text-gray-800 hover:bg-gray-200">
-                 Đơn hàng của tôi
-               </Link>
-               <button onClick={handleLogout} className="w-full text-left px-4 py-2 text-gray-800 hover:bg-gray-200">
-                 Logout
-               </button>
-             </div>
+                <div className="absolute right-0 mt-2 bg-white shadow-md rounded-md overflow-hidden z-10 w-48">
+                  <Link
+                    to="/profiles"
+                    className="block px-4 py-2 text-gray-800 hover:bg-gray-200"
+                  >
+                    Profile
+                  </Link>
+                  <Link
+                    to="/mybill"
+                    className="block px-4 py-2 text-gray-800 hover:bg-gray-200"
+                  >
+                    Đơn hàng của tôi
+                  </Link>
+                  <button
+                    onClick={handleLogout}
+                    className="w-full text-left px-4 py-2 text-gray-800 hover:bg-gray-200"
+                  >
+                    Logout
+                  </button>
+                </div>
               )}
             </div>
           </div>
@@ -230,40 +246,60 @@ export default function HeaderLayoutClient() {
             <div className="flex items-center">
               {user ? (
                 <div className="relative z-10">
-                <button className="text-gray-800" onClick={handleDropdownClick}>
-                  <UserOutlined
-                    style={{ fontSize: "18px" }}
-                    className="h-8 w-8 transform hover:scale-110 transition duration-200" />
-                </button>
-                {showDropdown && (
-                 <div className="absolute bg-white shadow-md rounded-md overflow-hidden z-10 w-48">
-                 <Link to="/profiles" className="block px-4 py-2 text-gray-800 hover:bg-gray-200">
-                   Profile
-                 </Link>
-                 <Link to="/mybill" className="block px-4 py-2 text-gray-800 hover:bg-gray-200">
-                   Đơn hàng của tôi
-                 </Link>
-                 <button onClick={handleLogout} className="w-full text-left px-4 py-2 text-gray-800 hover:bg-gray-200">
-                   Logout
-                 </button>
-               </div>
-                )}
-              </div>
+                  <button
+                    className="text-gray-800"
+                    onClick={handleDropdownClick}
+                  >
+                    <UserOutlined
+                      style={{ fontSize: "18px" }}
+                      className="h-8 w-8 transform hover:scale-110 transition duration-200"
+                    />
+                  </button>
+                  {showDropdown && (
+                    <div className="absolute bg-white shadow-md rounded-md overflow-hidden z-10 w-48">
+                      <Link
+                        to="/profiles"
+                        className="block px-4 py-2 text-gray-800 hover:bg-gray-200"
+                      >
+                        Profile
+                      </Link>
+                      <Link
+                        to="/mybill"
+                        className="block px-4 py-2 text-gray-800 hover:bg-gray-200"
+                      >
+                        Đơn hàng của tôi
+                      </Link>
+                      <button
+                        onClick={handleLogout}
+                        className="w-full text-left px-4 py-2 text-gray-800 hover:bg-gray-200"
+                      >
+                        Logout
+                      </button>
+                    </div>
+                  )}
+                </div>
               ) : (
                 <div className="flex justify-center">
-                  <Link to="/signup" className="mx-4 px-4 py-2 bg-blue-500 hover:bg-blue-700 text-white font-semibold rounded-md">
+                  <Link
+                    to="/signup"
+                    className="mx-4 px-4 py-2 bg-blue-500 hover:bg-blue-700 text-white font-semibold rounded-md"
+                  >
                     Đăng ký
                   </Link>
-                  <Link to="/signin" className="mx-4 px-4 py-2 bg-green-500 hover:bg-green-700 text-white font-semibold rounded-md">
+                  <Link
+                    to="/signin"
+                    className="mx-4 px-4 py-2 bg-green-500 hover:bg-green-700 text-white font-semibold rounded-md"
+                  >
                     Đăng nhập
                   </Link>
                 </div>
               )}
             </div>
-            <div>{/* Shopping cart icon */}
+            <div>
+              {/* Shopping cart icon */}
               <Link
                 to="/cart"
-                className="mt-4 text-sm font-medium text-gray-700 hover:text-blue-400 flex items-center"
+                className="mt-4 text-sm max-md:pb-4 max-md:pr-3 font-medium text-gray-700 hover:text-blue-400 flex items-center"
               >
                 <div className="relative flex-shrink-0">
                   <Badge count={sumCart}>

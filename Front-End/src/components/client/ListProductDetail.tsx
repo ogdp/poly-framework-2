@@ -14,9 +14,11 @@ type Props = {
 
 const ListProductDetail = (props: Props) => {
   const sumCartContext: any = useContext(SumCartContext);
-
   let cart: ICartItem | undefined = undefined;
   const [notification, setNotification] = useState<boolean>(false);
+  const emptyCart = window.localStorage.getItem("cart");
+  if (emptyCart == null)
+    window.localStorage.setItem("cart", JSON.stringify([]));
   const onFinish = async (values: IProduct) => {
     const nice: any = props.product.data;
     const convertPrice = nice.salePrice > 0 ? nice.salePrice : nice.price;

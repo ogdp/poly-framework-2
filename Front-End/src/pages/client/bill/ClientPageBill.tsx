@@ -1,8 +1,5 @@
-type TProps = {
-  data: any;
-};
-const ClientPageBill = (data: TProps) => {
-  console.log("Gọi con :: ", data);
+const ClientPageBill = () => {
+  console.log("Gọi con :: ");
   return <div>ClientPageBill</div>;
 };
 

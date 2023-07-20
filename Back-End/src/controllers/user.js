@@ -84,10 +84,17 @@ export const getBillFollowUser = async (req, res) => {
       status: "Giao thành công",
     });
     const deliveryCount = await Bill.find({ User_id: req.query.id }).count();
-    const bill = await Bill.find({ User_id: req.query.id });
+    const bill = await Bill.find({ User_id: req.query.id }).sort({
+      createdAt: -1,
+    });
     if (bill.length === 0) {
-      return res.status(404).json({
+      return res.status(200).json({
         message: "Không có đơn hàng nào",
+        deliveryPedding: 0,
+        delivering: 0,
+        deliverySuccess: 0,
+        deliveryCount: 0,
+        data: bill,
       });
     }
     return res.status(200).json({
@@ -99,8 +106,9 @@ export const getBillFollowUser = async (req, res) => {
       data: bill,
     });
   } catch (error) {
-    return res.status(500).json({
+    return res.status(200).json({
       message: error.message,
+      data: [],
     });
   }
 };

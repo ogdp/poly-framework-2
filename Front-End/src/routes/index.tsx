@@ -26,6 +26,7 @@ import TermOfServicePage from "../pages/client/tos/service/TermOfServicePage";
 import WarrantyPage from "../pages/client/tos/warranty/WarrantyPage";
 import RulePage from "../pages/client/tos/rules/RulePage";
 import ReturnPage from "../pages/client/tos/return/ReturnPage";
+import MyListBill from "../pages/client/profiles/MyListBill";
 
 const Router = () => {
   return (
@@ -49,6 +50,7 @@ const Router = () => {
           <Route path="contacts" element={<ContactPage />} />
           <Route path="profiles" element={<ProfilesPage />} />
           <Route path="cart" element={<ClientPageCart />} />
+          <Route path="mybill" element={<MyListBill />} />
           <Route path="bill/:id" element={<ClientPageBill />} />
         </Route>
         <Route path="admin" element={<LayoutAdmin />}>

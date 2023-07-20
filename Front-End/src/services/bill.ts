@@ -17,12 +17,16 @@ export const CreateBill = (data: DIBill) => {
   return intansce.post(`/bill`, data);
 };
 
-export const UpdateBill = (data: IBill) => {
-  return intansce.put(`/bill/${data._id}`, data, {
-    headers: {
-      Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-    },
-  });
+export const UpdateBill = (data: IBill | { _id: string; status: string }) => {
+  return intansce.patch(
+    `/bill/${data._id}`,
+    { status: data.status },
+    {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+      },
+    }
+  );
 };
 
 export const RemoveBill = (_id: string) => {
