@@ -1,10 +1,10 @@
-import React from "react";
+
 import { Link } from "react-router-dom";
 
 const RulePage = () => {
   return (
     <section>
-      <div className="grid grid-cols-3 gap-8">
+      <div className="grid lg:grid-cols-3 md:grid-cols-3 grid-cols-1 lg:gap-8 md:gap-4">
         <div className="border p-2">
           <h2 className="text-2xl font-bold">DANH MỤC TRANG</h2>
           <hr className="font-bold my-3" />

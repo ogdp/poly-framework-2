@@ -39,12 +39,14 @@ const AddProduct = () => {
   const onFinish = async (values: any) => {
     setFormFail(0);
     try {
-      messageApi.open({
-        key: 1,
-        type: "loading",
-        content: "Loading...",
-      });
+      // messageApi.open({
+      //   key: 1,
+      //   type: "loading",
+      //   content: "Loading...",
+      // });
+      message.loading("Loadding...", 1000000, () => {});
       setTimeout(() => {
+        message.destroy();
         messageApi.open({
           key: 1,
           type: "success",
@@ -64,6 +66,7 @@ const AddProduct = () => {
         values.images = data.urls;
         try {
           const res = await CreateProduct(values);
+          message.destroy();
           if (res) {
             setTimeLoadAlert(0);
             message.success("Thêm sản phẩm thành công", 2, () => {

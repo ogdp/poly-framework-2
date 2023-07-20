@@ -198,6 +198,29 @@ export const createBill = async function (req, res) {
 };
 export const updateBill = async function (req, res) {
   try {
+    if (req.user.role == "member") {
+      const bill1 = await Bill.findById(req.params.id);
+      // console.log(bill1.User_id);
+      // console.log(req.user._id);
+      // if (String(bill1.User_id) == String(req.user._id)) console.log("Bằng");
+      // return;
+      if (String(bill1.User_id) !== String(req.user._id))
+        return res.status(400).json({
+          message: "Bạn không đủ quyền",
+        });
+      const bill2 = await Bill.findByIdAndUpdate(req.params.id, req.body, {
+        new: true,
+      });
+      if (!bill2) {
+        return res.status(404).json({
+          message: "Cập nhật đơn hàng từ người dùng không thành công",
+        });
+      }
+      return res.status(200).json({
+        message: "Cập nhật đơn hàng từ người dùng thành công",
+        data: bill2,
+      });
+    }
     const bill = await Bill.findByIdAndUpdate(req.params.id, req.body, {
       new: true,
     });

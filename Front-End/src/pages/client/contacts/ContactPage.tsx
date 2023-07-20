@@ -33,7 +33,7 @@ const ContactPage = () => {
   };
   return (
     <section className="my-10">
-      <div className="grid grid-cols-2">
+      <div className="grid lg:grid-cols-2 md:grid-cols-2 md:gap-4 lg:gap-8 grid-cols-1">
         <div>
           {/* <img
             src="https://res.cloudinary.com/do2d1jyoh/image/upload/v1689124215/Screenshot_407_z3ksz3.png"
@@ -41,10 +41,9 @@ const ContactPage = () => {
           /> */}
           <iframe
             src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d697.39593968542!2d105.79803369783245!3d21.046789959217865!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3135ab6b960c64f3%3A0xe299d1031f8a0a95!2zQ2FvIMSR4bqzbmcgRlBUIHBvbHl0ZWNobmlj!5e0!3m2!1sen!2s!4v1689127447786!5m2!1sen!2s"
-            width="600"
-            height="1050"
             style={{ border: 0 }}
             loading="lazy"
+            className="lg:h-[1050px] md:h-[1050px] lg:block md:block w-full hidden"
           ></iframe>
         </div>
         <div className="mb-8">
@@ -170,13 +169,14 @@ const ContactPage = () => {
                 <TextArea
                   rows={4}
                   placeholder="Nội dung tin nhắn"
-                  maxLength={30}
+                  maxLength={100}
+                  className="font-mono border border-indigo-600"
                 />
               </Form.Item>
 
               <Button
                 htmlType="submit"
-                className="bg-[#FFDD00] text-white font-bold w-full"
+                className="bg-[#FFDD00] text-white font-bold w-full py-2"
               >
                 GỬI THÔNG TIN
               </Button>
@@ -184,25 +184,7 @@ const ContactPage = () => {
           </div>
         </div>
       </div>
-      <div className="bg-[#F3F3F3] flex items-center py-3 px-3 justify-between">
-        <div>
-          <h2 className="font-bold">ĐĂNG KÝ NHẬN TIN</h2>
-        </div>
-        <form action="">
-          <input
-            className="border p-2 my-3"
-            type="text"
-            placeholder="Email của bạn"
-          />
-          <button className="bg-[#FFDD00] text-white py-2 px-7 font-bold">
-            ĐĂNG KÝ
-          </button>
-        </form>
-        <div>
-          HOTLINE ĐƠN HÀNG ONLINE:{" "}
-          <span className="text-red-500">0123456789</span>
-        </div>
-      </div>
+
       <div className="grid grid-cols-4">
         <div className="text-center border py-8">
           <svg

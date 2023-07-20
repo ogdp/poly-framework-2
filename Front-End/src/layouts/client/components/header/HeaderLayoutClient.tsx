@@ -1,6 +1,6 @@
 import { useEffect, useContext } from "react";
 import { Badge } from "antd";
-import { ShoppingCartOutlined } from "@ant-design/icons";
+import { ShoppingCartOutlined, UserOutlined, LogoutOutlined } from "@ant-design/icons";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { ICartItem } from "../../../../types/cart";
@@ -9,6 +9,17 @@ export default function HeaderLayoutClient() {
   const sumCartContext = useContext(SumCartContext);
   const [show, setshow] = useState(false);
   const [sumCart, setSumCart] = useState(0);
+  const [showDropdown, setShowDropdown] = useState(false);
+  const user = localStorage.getItem('user');
+
+  function handleDropdownClick() {
+    setShowDropdown(!showDropdown);
+  }
+
+  function handleLogout() {
+    // Implement logout logic here
+    localStorage.removeItem('user');
+  }
   useEffect(() => {
     setSumCart(Number(sumCartContext?.value));
     try {
@@ -52,7 +63,7 @@ export default function HeaderLayoutClient() {
   return (
     <div className="bg-white">
       <nav className="2xl:container 2xl:mx-auto sm:py-6">
-        <div className="flex justify-between ">
+        <div className="flex justify-between items-center ">
           <Link
             to="/"
             className="text-2xl text-gray-700 dark:text-gray-400 font-bold"
@@ -110,26 +121,32 @@ export default function HeaderLayoutClient() {
                 </Badge>
               </Link>
             </div>
-            <div className="flex justify-center">
-              <Link
-                to="/signup"
-                className="mx-4 px-4 py-2 bg-blue-500 hover:bg-blue-700 text-white font-semibold rounded-md"
-              >
-                Đăng ký
-              </Link>
-              <Link
-                to="/signin"
-                className="mx-4 px-4 py-2 bg-green-500 hover:bg-green-700 text-white font-semibold rounded-md"
-              >
-                Đăng nhập
-              </Link>
+            <div className="relative z-10">
+              <button className="text-gray-800" onClick={handleDropdownClick}>
+                <UserOutlined
+                  style={{ fontSize: "24px" }}
+                  className="h-8 w-8 transform hover:scale-110 transition duration-200" />
+              </button>
+              {showDropdown && (
+               <div className="absolute right-0 mt-2 bg-white shadow-md rounded-md overflow-hidden z-10 w-48">
+               <Link to="/profiles" className="block px-4 py-2 text-gray-800 hover:bg-gray-200">
+                 Profile
+               </Link>
+               <Link to="/mybill" className="block px-4 py-2 text-gray-800 hover:bg-gray-200">
+                 Đơn hàng của tôi
+               </Link>
+               <button onClick={handleLogout} className="w-full text-left px-4 py-2 text-gray-800 hover:bg-gray-200">
+                 Logout
+               </button>
+             </div>
+              )}
             </div>
           </div>
           {/* Burger Icon */}
           <div
             id="bgIcon"
             onClick={() => setshow(!show)}
-            className={`focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800  justify-center items-center sm:hidden cursor-pointer`}
+            className={`focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800  justify-center items-center sm:hidden cursor-pointer relative z-10`}
           >
             <svg
               className={`${show ? "hidden" : ""}`}
@@ -209,33 +226,55 @@ export default function HeaderLayoutClient() {
               </li>
             </ul>
           </div>
-          <div className="mt-4 ml-[-10px]">
-            <Link
-              to="/signup"
-              className="mx-2 px-2 py-2 bg-blue-500 hover:bg-blue-700 text-white font-semibold rounded-md"
-            >
-              Đăng ký
-            </Link>
-            <Link
-              to="/signin"
-              className="mx-2 px-2 py-2 bg-green-500 hover:bg-green-700 text-white font-semibold rounded-md"
-            >
-              Đăng nhập
-            </Link>
-            {/* Shopping cart icon */}
-            <Link
-              to="/cart"
-              className="mt-4 text-sm font-medium text-gray-700 hover:text-blue-400 flex items-center"
-            >
-              <div className="relative flex-shrink-0">
-                <Badge count={sumCart}>
-                  <ShoppingCartOutlined
-                    className="h-5 w-5 ml-[20px]"
-                    style={{ fontSize: "30px" }}
-                  />
-                </Badge>
+          <div className="mt-4 ml-[-10px] flex justify-between items-center">
+            <div className="flex items-center">
+              {user ? (
+                <div className="relative z-10">
+                <button className="text-gray-800" onClick={handleDropdownClick}>
+                  <UserOutlined
+                    style={{ fontSize: "18px" }}
+                    className="h-8 w-8 transform hover:scale-110 transition duration-200" />
+                </button>
+                {showDropdown && (
+                 <div className="absolute bg-white shadow-md rounded-md overflow-hidden z-10 w-48">
+                 <Link to="/profiles" className="block px-4 py-2 text-gray-800 hover:bg-gray-200">
+                   Profile
+                 </Link>
+                 <Link to="/mybill" className="block px-4 py-2 text-gray-800 hover:bg-gray-200">
+                   Đơn hàng của tôi
+                 </Link>
+                 <button onClick={handleLogout} className="w-full text-left px-4 py-2 text-gray-800 hover:bg-gray-200">
+                   Logout
+                 </button>
+               </div>
+                )}
               </div>
-            </Link>
+              ) : (
+                <div className="flex justify-center">
+                  <Link to="/signup" className="mx-4 px-4 py-2 bg-blue-500 hover:bg-blue-700 text-white font-semibold rounded-md">
+                    Đăng ký
+                  </Link>
+                  <Link to="/signin" className="mx-4 px-4 py-2 bg-green-500 hover:bg-green-700 text-white font-semibold rounded-md">
+                    Đăng nhập
+                  </Link>
+                </div>
+              )}
+            </div>
+            <div>{/* Shopping cart icon */}
+              <Link
+                to="/cart"
+                className="mt-4 text-sm font-medium text-gray-700 hover:text-blue-400 flex items-center"
+              >
+                <div className="relative flex-shrink-0">
+                  <Badge count={sumCart}>
+                    <ShoppingCartOutlined
+                      className="h-5 w-5 ml-[12px]"
+                      style={{ fontSize: "30px" }}
+                    />
+                  </Badge>
+                </div>
+              </Link>
+            </div>
           </div>
         </div>
       </nav>

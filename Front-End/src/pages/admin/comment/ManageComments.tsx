@@ -116,7 +116,7 @@ const ManageComment = () => {
         columns={columns}
         dataSource={data}
         bordered
-        pagination={{ pageSize: 4, showQuickJumper: true }}
+        pagination={{ pageSize: 8, showQuickJumper: true }}
       />
     </>
   );

@@ -5,7 +5,7 @@ import { SumCartProvider } from "../../context/client/HeaderContext";
 const LayoutClient = () => {
   return (
     <>
-      <div className="max-w-screen-xl mx-auto px-4">
+      <div className="max-w-screen-xl mx-auto px-2">
         <SumCartProvider>
           <HeaderLayoutClient />
           <main>

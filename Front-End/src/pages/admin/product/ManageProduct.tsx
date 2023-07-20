@@ -61,7 +61,7 @@ const ManageProduct = () => {
       title: "TÊN",
       dataIndex: "name",
       render: (t: any, r: any) => (
-        <Link to={`/products/${r.key}`}>{`${r.name}`}</Link>
+        <Link to={`/products/${r.key}`} target="_blank">{`${r.name}`}</Link>
       ),
     },
     {
