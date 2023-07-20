@@ -16,12 +16,12 @@ export const CheckMember = async (req, res, next) => {
     jwt.verify(token, SECRET_CODE, async (err, payload) => {
       if (err) {
         if (err.name === "JsonWebTokenError") {
-          return res.json({
+          return res.status(400).json({
             message: "Token không hợp lệ",
           });
         }
         if (err.name === "TokenExpiredError") {
-          return res.json({
+          return res.status(400).json({
             message: "Token hết hạn",
           });
         }

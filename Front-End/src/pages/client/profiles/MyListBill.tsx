@@ -1,4 +1,4 @@
-import { Table } from "antd";
+import { Table, message } from "antd";
 import React, { useEffect, useState } from "react";
 import { formatDate } from "../../../utils/DateUtils";
 import { Link, useNavigate } from "react-router-dom";
@@ -217,15 +217,20 @@ const MyListBill = () => {
     };
   });
   async function onHandleUpdate(id: string) {
+    message.loading("Vui lòng chờ ....", 10000, () => {});
     try {
       const data = {
         _id: id,
         status: "Huỷ đơn",
       };
       const res = await UpdateBill(data);
-      console.log(res);
-    } catch (error) {
-      console.log(error);
+      message.destroy();
+      await message.success("Huỷ đơn thành công", 2, () => {});
+      window.location.reload();
+    } catch (error: any) {
+      message.destroy();
+      await message.error(String(error.response.data.message), 2, () => {});
+      window.location.reload();
     }
   }
   return (
