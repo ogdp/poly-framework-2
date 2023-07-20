@@ -8,7 +8,7 @@ const ListProductByCategories = () => {
   const { data: categories } = useFetchData("/categories");
   return (
     <section>
-      {categories.map((item: ICategory) => {
+      {categories.reverse().map((item: ICategory) => {
         return (
           <div key={item._id} className="container mx-auto">
             <div className="title">

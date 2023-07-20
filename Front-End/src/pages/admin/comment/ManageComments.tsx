@@ -83,7 +83,6 @@ const ManageComment = () => {
       title: "HÀNH ĐỘNG",
       render: (item: IComment) => (
         <>
-
           <button
             className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
             onClick={() => HandleRemoveComment(item._id)}
@@ -99,7 +98,7 @@ const ManageComment = () => {
     return {
       index: index + 1,
       _id: item._id,
-      key: item._id,
+      key: item.Product_id,
       nameProduct: item.product.name,
       nameUser: item.user.name,
       content: item.content,

@@ -1,7 +1,7 @@
-import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useEffect, useState, useContext } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import IUser from "../../types/user";
-import { Input, Modal, message, Form, Select, Button } from "antd";
+import { Input, Modal, message, Form, Select, Button, Checkbox } from "antd";
 import TextArea from "antd/es/input/TextArea";
 import { ICartItem } from "../../types/cart";
 import { CreateBill } from "../../services/bill";
@@ -38,6 +38,12 @@ const ClientFormAddBill = ({
     setCart(getCart());
   }, [propCheck]);
   const onFinish = async (values: any) => {
+    if (values.tos == false)
+      return message.warning(
+        "Chấp nhận điều khoản chính sách để tiếp tục",
+        2,
+        undefined
+      );
     let total = 0;
     const sendCart: Itembill[] = [];
     if (typeof cart !== "boolean" && cart !== null) {
@@ -64,7 +70,8 @@ const ClientFormAddBill = ({
         if (res && res?.message == "Tạo đơn hàng thành công") {
           await message.success("Lên đơn thành công !", 1.5, () => {});
           window.localStorage.setItem("cart", "[]");
-          return window.location.reload();
+          await navigate(`/billsuccess/${res.data._id}`);
+          navigate(0);
         }
       } catch (error: any) {
         console.log("Lỗi rồi", error);
@@ -77,12 +84,11 @@ const ClientFormAddBill = ({
   };
   const onFinishFailed = (values: any) => {
     message.error("Điền đầy đủ thông tin các trường", 2, () => {});
-    // console.log(values);
   };
   const methodPay = [
     { _id: 1, name: "Nhận hàng thanh toán" },
-    { _id: 2, name: "Thanh toán qua MOMO" },
-    { _id: 3, name: "Thanh toán qua Zalo Pay" },
+    // { _id: 2, name: "Thanh toán qua MOMO" },
+    // { _id: 3, name: "Thanh toán qua Zalo Pay" },
   ];
   function getCart() {
     try {
@@ -138,6 +144,7 @@ const ClientFormAddBill = ({
             name="newProductForm"
             onFinish={onFinish}
             onFinishFailed={onFinishFailed}
+            initialValues={{ tos: false }}
             layout="vertical"
           >
             <Form.Item
@@ -249,6 +256,14 @@ const ClientFormAddBill = ({
                 ))}
               </Select>
             </Form.Item>
+            <Form.Item name="tos" valuePropName="checked">
+              <Checkbox>
+                Chấp nhận mọi điều khoản của chúng tôi.{" "}
+                <Link to={"/tos"} target="_blank" className="underline">
+                  Điều khoản chính sách
+                </Link>
+              </Checkbox>
+            </Form.Item>
 
             <Form.Item>
               <Button
@@ -260,128 +275,6 @@ const ClientFormAddBill = ({
             </Form.Item>
           </Form>
         </Modal>
-        {/* <div className="leading-loose">
-          <form className="max-w-xl m-4 p-10 bg-white rounded shadow-xl">
-            <p className="text-gray-800 font-medium">Customer information</p>
-            <div className="">
-              <label className="block text-sm text-gray-00" htmlFor="cus_name">
-                Name
-              </label>
-              <input
-                className="w-full px-5 py-1 text-gray-700 bg-gray-200 rounded"
-                id="cus_name"
-                name="cus_name"
-                type="text"
-                placeholder="Your Name"
-                aria-label="Name"
-              />
-            </div>
-            <div className="mt-2">
-              <label
-                className="block text-sm text-gray-600"
-                htmlFor="cus_email"
-              >
-                Email
-              </label>
-              <input
-                className="w-full px-5  py-4 text-gray-700 bg-gray-200 rounded"
-                id="cus_email"
-                name="cus_email"
-                type="text"
-                placeholder="Your Email"
-                aria-label="Email"
-              />
-            </div>
-            <div className="mt-2">
-              <label
-                className=" block text-sm text-gray-600"
-                htmlFor="cus_email"
-              >
-                Address
-              </label>
-              <input
-                className="w-full px-2 py-2 text-gray-700 bg-gray-200 rounded"
-                id="cus_email"
-                name="cus_email"
-                type="text"
-                placeholder="Street"
-                aria-label="Email"
-              />
-            </div>
-            <div className="mt-2">
-              <label
-                className="text-sm block text-gray-600"
-                htmlFor="cus_email"
-              >
-                City
-              </label>
-              <input
-                className="w-full px-2 py-2 text-gray-700 bg-gray-200 rounded"
-                id="cus_email"
-                name="cus_email"
-                type="text"
-                placeholder="City"
-                aria-label="Email"
-              />
-            </div>
-            <div className="inline-block mt-2 w-1/2 pr-1">
-              <label
-                className="block text-sm text-gray-600"
-                htmlFor="cus_email"
-              >
-                Country
-              </label>
-              <input
-                className="w-full px-2 py-2 text-gray-700 bg-gray-200 rounded"
-                id="cus_email"
-                name="cus_email"
-                type="text"
-                placeholder="Country"
-                aria-label="Email"
-              />
-            </div>
-            <div className="inline-block mt-2 -mx-1 pl-1 w-1/2">
-              <label
-                className="block text-sm text-gray-600"
-                htmlFor="cus_email"
-              >
-                Zip
-              </label>
-              <input
-                className="w-full px-2 py-2 text-gray-700 bg-gray-200 rounded"
-                id="cus_email"
-                name="cus_email"
-                type="text"
-                placeholder="Zip"
-                aria-label="Email"
-              />
-            </div>
-            <p className="mt-4 text-gray-800 font-medium">
-              Payment information
-            </p>
-            <div className="">
-              <label className="block text-sm text-gray-600" htmlFor="cus_name">
-                Card
-              </label>
-              <input
-                className="w-full px-2 py-2 text-gray-700 bg-gray-200 rounded"
-                id="cus_name"
-                name="cus_name"
-                type="text"
-                placeholder="Card Number MM/YY CVC"
-                aria-label="Name"
-              />
-            </div>
-            <div className="mt-4">
-              <button
-                className="px-4 py-1 text-white font-light tracking-wider bg-gray-900 rounded"
-                type="submit"
-              >
-                $3.00
-              </button>
-            </div>
-          </form>
-        </div> */}
       </section>
     </>
   );
