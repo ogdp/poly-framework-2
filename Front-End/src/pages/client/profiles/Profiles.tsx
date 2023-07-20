@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
-import { GetOneUser } from "../../../services/user";
+import { GetBillFollowUser, GetOneUser } from "../../../services/user";
 import { useNavigate } from "react-router-dom";
 import IUser from "../../../types/user";
 import { formatDate } from "../../../utils/DateUtils";
 const ProfilesPage = () => {
   const navigate = useNavigate();
   const [user, setUser] = useState<IUser | undefined>(undefined);
+  const [myBill, setMyBill] = useState<any>(undefined);
   useEffect(() => {
     getData();
   }, []);
@@ -16,6 +17,13 @@ const ProfilesPage = () => {
       if (!userJSON) return navigate("/signin");
       const { data } = await GetOneUser(userJSON._id);
       setUser(data);
+      const resMyBill: any = await GetBillFollowUser(userJSON._id);
+      setMyBill({
+        deliveryPedding: resMyBill.deliveryPedding,
+        delivering: resMyBill.delivering,
+        deliverySuccess: resMyBill.deliverySuccess,
+        deliveryCount: resMyBill.deliveryCount,
+      });
     } catch (error) {
       console.log(error);
       navigate("/signin");
@@ -39,16 +47,22 @@ const ProfilesPage = () => {
         <header className="md:pb-[10%] grid md:grid-cols-3 py-3">
           <div className="max-md:order-2 flex md:gap-5 gap-2 max-md:w-full max-md:justify-center">
             <div className="text-center">
-              <h3 className="text-gray-600 font-medium">22</h3>
+              <h3 className="text-gray-600 font-medium">
+                {myBill?.deliveryCount}
+              </h3>
               <p className="text-sm font-medium text-gray-600">Tổng đơn</p>
             </div>
             <div className="text-center">
-              <h3 className="text-gray-600 font-medium">10</h3>
-              <p className="text-sm font-medium text-gray-600">Đang giao</p>
+              <h3 className="text-gray-600 font-medium">
+                {myBill?.deliveryPedding}
+              </h3>
+              <p className="text-sm font-medium text-gray-600">Chờ duyệt</p>
             </div>
             <div className="text-center">
-              <h3 className="text-gray-600 font-medium">12</h3>
-              <p className="text-sm font-medium text-gray-600">Thành công</p>
+              <h3 className="text-gray-600 font-medium">
+                {myBill?.delivering}
+              </h3>
+              <p className="text-sm font-medium text-gray-600">Đang giao</p>
             </div>
           </div>
           <div className="max-md:order-1 md:relative max-md:py-3 max-md:flex max-md:justify-center max-md:items-center">

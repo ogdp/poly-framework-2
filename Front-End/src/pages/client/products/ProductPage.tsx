@@ -9,12 +9,23 @@ import { GetOneCategory } from "../../../services/categories";
 import { Pagination } from "antd";
 const ProductPage = () => {
   const [products, setProducts] = useState([]);
-  const [currentPage, setCurrentPage] = useState<number>(9);
   const [category, setCategory] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [currentPage, setCurrentPage] = useState<number>(1);
+  const [productsPerPage, setProductsPerPage] = useState(9);
+  const indexOfLastProduct = currentPage * productsPerPage;
+  const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
+  const currentProducts = products.slice(
+    indexOfFirstProduct,
+    indexOfLastProduct
+  );
   useEffect(() => {
     onHandleGetAllProduct();
   }, []);
+  // pagination
+  const handleChangePage = (page: number) => {
+    setCurrentPage(page);
+  };
   async function onHandleGetAllProduct() {
     try {
       const { data } = await GetAllProduct();
@@ -40,6 +51,7 @@ const ProductPage = () => {
   async function onHandleGetOneCategory(id: string) {
     try {
       const resPro = await GetOneCategory(String(id));
+      setCurrentPage(1);
       setProducts(resPro.data.products);
       const res = await GetAllCategory();
       setCategory(res.data);
@@ -48,18 +60,7 @@ const ProductPage = () => {
       console.log(error);
     }
   }
-  // pagination
-  const [productsPerPage, setProductsPerPage] = useState(9);
-  const indexOfLastProduct = currentPage * productsPerPage;
-  const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
-  const currentProducts = products.slice(
-    indexOfFirstProduct,
-    indexOfLastProduct
-  );
 
-  const handleChangePage = (page: number) => {
-    setCurrentPage(page);
-  };
   if (loading) return <div>Loading ...</div>;
   return (
     <section>
@@ -115,17 +116,19 @@ const ProductPage = () => {
             </div>
           </div>
           {products.length > 0 ? (
-            <section className="grid md:grid-cols-3 max-sm:grid-cols-1 gap-7 py-4">
-              {currentProducts?.map((product: IProduct, index) => (
-                <ClientProductCard
-                  key={index}
-                  _id={product._id}
-                  name={product.name}
-                  price={product.price}
-                  salePrice={product.salePrice}
-                  imageUrl={product.images[0]}
-                />
-              ))}
+            <>
+              <section className="grid md:grid-cols-3 max-sm:grid-cols-1 gap-7 py-4">
+                {currentProducts?.map((product: IProduct, index) => (
+                  <ClientProductCard
+                    key={index}
+                    _id={product._id}
+                    name={product.name}
+                    price={product.price}
+                    salePrice={product.salePrice}
+                    imageUrl={product.images[0]}
+                  />
+                ))}
+              </section>{" "}
               <Pagination
                 className="mt-8"
                 current={currentPage}
@@ -133,17 +136,7 @@ const ProductPage = () => {
                 total={products.length}
                 onChange={handleChangePage}
               />
-
-              {/* <Pagination
-                total={Math.floor(products.length / 10) + 1}
-                showSizeChanger
-                showQuickJumper
-                showTotal={(total) => {
-                  return `Total ${total} items`;
-                }}
-                onChange={handlePageChange}
-              /> */}
-            </section>
+            </>
           ) : (
             <div className="w-full text-center">
               <h3 className="text-xl font-medium py-10">
