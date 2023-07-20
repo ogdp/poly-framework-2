@@ -21,7 +21,7 @@ import EditCategory from "../pages/admin/category/EditCategory";
 import AddCategory from "../pages/admin/category/AddCategory";
 import ManageComment from "../pages/admin/comment";
 import ManageContact from "../pages/admin/contact";
-import ClientPageBill from "../pages/client/bill/ClientPageBill";
+import BillSuccess from "../pages/client/cart-succes/BillSuccess";
 import TermOfServicePage from "../pages/client/tos/service/TermOfServicePage";
 import WarrantyPage from "../pages/client/tos/warranty/WarrantyPage";
 import RulePage from "../pages/client/tos/rules/RulePage";
@@ -51,7 +51,7 @@ const Router = () => {
           <Route path="profiles" element={<ProfilesPage />} />
           <Route path="cart" element={<ClientPageCart />} />
           <Route path="mybill" element={<MyListBill />} />
-          <Route path="bill/:id" element={<ClientPageBill />} />
+          <Route path="billsuccess/:id" element={<BillSuccess />} />
         </Route>
         <Route path="admin" element={<LayoutAdmin />}>
           <Route index element={<Dashboard />} />
@@ -71,26 +71,6 @@ const Router = () => {
           <Route path="contacts">
             <Route index element={<ManageContact />} />
           </Route>
-
-          {/* <Route index element={<Management />} />
-                    <Route path='products'>
-                        <Route index element={<ManagementProduct />} />
-                        <Route path=':id/update' element={<ManagementProductUpdate />} />
-                    </Route>
-                    <Route path='categories'>
-                        <Route index element={<ManageCategory />} />
-                        <Route path=':id/update' element={<ManageCategoryUpdate />} />
-                    </Route>
-                    <Route path='order/bill'>
-                        <Route index element={<ManageBill />} />
-                        <Route path=':id/update' element={<ManageBillUpdate />} />
-                    </Route>
-                    <Route path='comments'>
-                        <Route index element={<ManageComment />} />
-                    </Route>
-                    <Route path='contacts'>
-                        <Route index element={<ManageContact />} />
-                    </Route> */}
           <Route path="accounts">
             <Route index element={<ManageUser />} />
           </Route>

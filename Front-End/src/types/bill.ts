@@ -29,6 +29,7 @@ export interface DIBill {
   deletedAt?: Date | null;
 }
 export interface Itembill {
+  [x: string]: any;
   _id: string;
   image: string;
   name: string;

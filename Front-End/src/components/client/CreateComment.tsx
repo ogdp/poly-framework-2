@@ -25,8 +25,8 @@ const CreateComment = () => {
           Product: value.Product,
           name: value.name,
           User_id: userParse.User_id,
-          Product_id: userParse.Product_id, 
-          role: "admin"
+          Product_id: userParse.Product_id,
+          role: "admin",
         };
         if (Data) {
           try {
