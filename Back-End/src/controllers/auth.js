@@ -17,7 +17,7 @@ export const Signup = async (req, res) => {
     const token =
       Math.random().toString(36).substring(2, 15) +
       Math.random().toString(36).substring(2, 15);
-    const link = `http://localhost:5173/signin?token=${token}`;
+    const link = `https://poly-framework-2.vercel.app/signin?token=${token}`;
     const { name, email, address, password } = req.body;
 
     const { error } = signupSchema.validate(req.body, { abortEarly: false });
