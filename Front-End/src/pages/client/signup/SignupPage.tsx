@@ -56,10 +56,10 @@ const SignupPage = () => {
           aria-label="Login to your account"
           className="text-2xl font-extrabold leading-6 text-gray-800 mb-8"
         >
-          signup to your account
+          Đăng ký
         </p>
         <p className="text-sm mt-4 font-medium leading-none text-gray-500">
-          Do you already have an account?{" "}
+          Ban đã có tài khoản?{" "}
           <span
             tabIndex={0}
             role="link"
@@ -67,7 +67,7 @@ const SignupPage = () => {
             className="text-sm font-medium leading-none underline text-gray-800 cursor-pointer"
           >
             {" "}
-            <Link to="/signin">Sign in here</Link>
+            <Link to="/signin">Đăng nhập tại đây</Link>
           </span>
         </p>
         <Form.Item
@@ -93,7 +93,7 @@ const SignupPage = () => {
           label="Email"
           rules={[
             {
-              message: "vui lòng nhập email!",
+              message: "Vui lòng nhập email!",
               required: true,
               type: "email",
             },
@@ -107,7 +107,7 @@ const SignupPage = () => {
         <Form.Item
           className="text-black font-bold"
           name="password"
-          label="mật khẩu"
+          label="Mật khẩu"
           rules={[
             {
               message: "Vui lòng nhập password!",
@@ -165,7 +165,7 @@ const SignupPage = () => {
           htmlType="submit"
           className="w-full h-[52px] text-center py-3 rounded-xl bg-[black] text-white hover:bg-green-dark focus:outline-none my-1"
         >
-          Sign up
+          Đăng ký
         </Button>
       </Form>
     </section>
