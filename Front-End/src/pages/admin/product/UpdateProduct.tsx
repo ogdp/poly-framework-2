@@ -29,6 +29,7 @@ const UpdateProduct = () => {
   const [product, setProduct] = useState<IProduct | undefined>(undefined);
   const [messageApi, contextHolder] = message.useMessage();
   const [formFail, setFormFail] = useState<number>(0);
+  if (messageApi) Date.now();
   useEffect(() => {
     GetOneProduct(String(id)).then(({ data }) => {
       setProduct(data);

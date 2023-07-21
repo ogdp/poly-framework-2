@@ -60,6 +60,7 @@ const ManageComment = () => {
       render: (t: any, r: any) => (
         <Link
           target="_blank"
+          key={t}
           to={`/products/${r.key}`}
         >{`${r.nameProduct}`}</Link>
       ),
@@ -77,7 +78,9 @@ const ManageComment = () => {
     {
       title: "THỜI GIAN",
       dataIndex: "createdAt",
-      render: (t: any, r: any) => <span>{`${formatDate(r.createdAt)}`}</span>,
+      render: (t: any, r: any) => (
+        <span key={t}>{`${formatDate(r.createdAt)}`}</span>
+      ),
     },
     {
       title: "HÀNH ĐỘNG",

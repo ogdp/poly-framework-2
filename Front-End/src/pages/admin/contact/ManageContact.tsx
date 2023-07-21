@@ -72,7 +72,10 @@ const ManageContact = () => {
       dataIndex: "message",
       render: (t: any, r: any) => {
         return (
-          <span className="text-center line-clamp-3 hover:line-clamp-6 max-w-sm">
+          <span
+            key={t}
+            className="text-center line-clamp-3 hover:line-clamp-6 max-w-sm"
+          >
             {r.message}
           </span>
         );

@@ -35,6 +35,7 @@ const AddProduct = () => {
   const beforeUpload = () => {
     return false;
   };
+  if (messageApi) Date.now();
   const onFinish = async (values: any) => {
     setFormFail(0);
     try {

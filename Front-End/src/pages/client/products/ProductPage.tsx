@@ -12,13 +12,14 @@ const ProductPage = () => {
   const [category, setCategory] = useState([]);
   const [loading, setLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState<number>(1);
-  const [productsPerPage, setProductsPerPage] = useState(9);
+  const productsPerPage = 9;
   const indexOfLastProduct = currentPage * productsPerPage;
   const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
   const currentProducts = products.slice(
     indexOfFirstProduct,
     indexOfLastProduct
   );
+  if (productsPerPage) Date.now();
   useEffect(() => {
     onHandleGetAllProduct();
   }, []);

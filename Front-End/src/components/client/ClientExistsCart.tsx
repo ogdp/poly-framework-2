@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { ICartItem } from "../../types/cart";
 import { formatMoney } from "../../utils/MoneyUtils";
@@ -17,7 +17,7 @@ const ClientExistsCart = ({
     const [sumMoney, setSumMoney] = useState<Number>(0);
     let sum = 0;
     useEffect(() => {
-      const nice = data.map((item: ICartItem) => {
+      data.map((item: ICartItem) => {
         sum += item.quantity * item.price;
         setSumMoney(sum);
         return false;

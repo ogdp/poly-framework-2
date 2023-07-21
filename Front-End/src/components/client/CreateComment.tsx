@@ -1,14 +1,12 @@
 import { message, Form, Input } from "antd";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import useFetchData from "../../hooks/useFetchData";
 import IComment from "../../types/comment";
 import { CreateCommentByProduct } from "../../services/comments";
 import { formatDate } from "../../utils/DateUtils";
 const CreateComment = () => {
   const { id }: string | any = useParams();
-  const navigate = useNavigate();
   const { data } = useFetchData("/comments/product/" + id);
-  console.log(data);
   const user = localStorage.getItem("user");
   const userParse = user ? JSON.parse(user) : null;
   const onFinish = async (value: IComment) => {
@@ -35,7 +33,6 @@ const CreateComment = () => {
           } catch (error: any) {
             message.error(error.response.data.message, 5);
           }
-          console.log(Data);
         }
       }
     }

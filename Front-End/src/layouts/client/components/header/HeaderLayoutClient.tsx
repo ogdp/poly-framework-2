@@ -1,10 +1,6 @@
 import { useEffect, useContext } from "react";
 import { Badge, message } from "antd";
-import {
-  ShoppingCartOutlined,
-  UserOutlined,
-  LogoutOutlined,
-} from "@ant-design/icons";
+import { ShoppingCartOutlined, UserOutlined } from "@ant-design/icons";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { ICartItem } from "../../../../types/cart";

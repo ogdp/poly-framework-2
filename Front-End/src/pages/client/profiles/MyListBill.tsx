@@ -27,14 +27,14 @@ const MyListBill = () => {
       // navigate("/signin");
     }
   };
-  const columns = [
+  const columns: any = [
     {
       title: "STT",
       dataIndex: "key",
       key: "key",
       sortDirections: ["descend", "ascend"],
       responsive: ["sm"],
-      render: (key: number) => key,
+      render: (key: string) => key,
     },
     {
       title: "Đơn hàng",
@@ -44,7 +44,7 @@ const MyListBill = () => {
       responsive: ["sm"],
       render: (products: ICartItem[]) => (
         <div>
-          {products.map((item: any, index: any) => (
+          {products.map((item: any, index: number) => (
             <div key={index + 1}>
               <Link to={`/products/${item._id}`} target="_blank">
                 {item.name}
@@ -88,6 +88,7 @@ const MyListBill = () => {
       title: "Thông tin",
       dataIndex: "noname",
       key: "noname",
+      responsive: ["xs"],
       render: (noname: any) => (
         <React.Fragment>
           <div>
@@ -132,13 +133,12 @@ const MyListBill = () => {
           </div>
         </React.Fragment>
       ),
-      responsive: ["xs"],
     },
     {
       title: "Trạng thái",
       dataIndex: "status",
       key: "status",
-      sorter: (a: any, b: any) => a.to - b.to,
+      // sorter: (a: any, b: any) => a.to - b.to,
       sortDirections: ["descend", "ascend"],
       responsive: ["sm"],
       render: (status: any) => (
@@ -162,7 +162,7 @@ const MyListBill = () => {
       title: "Ngày đặt",
       dataIndex: "createdAt",
       key: "createdAt",
-      sorter: (a: any, b: any) => a.to - b.to,
+      // sorter: (a: any, b: any) => a.to - b.to,
       sortDirections: ["descend", "ascend"],
       responsive: ["sm"],
       render: (createdAt: any) => formatDate(createdAt),
@@ -171,6 +171,7 @@ const MyListBill = () => {
       title: "Trạng thái",
       dataIndex: "noname",
       key: "noname",
+      responsive: ["xs"],
       render: (noname: any) => (
         <React.Fragment>
           <span className="font-semibold text-gray-800">
@@ -192,7 +193,6 @@ const MyListBill = () => {
           {formatDate(noname.item.createdAt)}
         </React.Fragment>
       ),
-      responsive: ["xs"],
     },
   ];
   if (!myBill || myBill == undefined) return <>Loadding ...</>;
@@ -200,6 +200,7 @@ const MyListBill = () => {
     return {
       key: index + 1,
       _id: item._id,
+      products: item.items,
       receiver: {
         name: item.name,
         email: item.email,
@@ -207,7 +208,6 @@ const MyListBill = () => {
         tel: item.phone,
         total: item.total,
       },
-      products: item.items,
       status: {
         id: item._id,
         name: item.status,
@@ -223,7 +223,7 @@ const MyListBill = () => {
         _id: id,
         status: "Huỷ đơn",
       };
-      const res = await UpdateBill(data);
+      await UpdateBill(data);
       message.destroy();
       await message.success("Huỷ đơn thành công", 2, () => {});
       window.location.reload();
@@ -248,7 +248,6 @@ const MyListBill = () => {
               dataSource={data}
               bordered
               pagination={{ pageSize: 8, showQuickJumper: true }}
-              mobileBreakPoint={768}
             />
           ) : (
             <div className="text-center">Danh sách trống</div>

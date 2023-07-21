@@ -1,11 +1,11 @@
 export interface ICategory {
   _id: string;
   key: string;
-  name: string,
-  products: Product[],
+  name: string;
+  products: Product[];
   createdAt?: Date;
   updatedAt?: Date;
-  deletedAt?: Date | null,
+  deletedAt?: Date | null;
 }
 
 export interface Product {
@@ -23,7 +23,7 @@ export interface Product {
   CategoryId: Category[];
   createdAt?: Date;
   updatedAt?: Date;
-  deletedAt?: Date | null,
+  deletedAt?: Date | null;
 }
 
 interface Sizes {
@@ -38,21 +38,11 @@ interface Tag {
   updatedAt: string;
 }
 
-interface Comment {
-  _id: string;
-  content: string;
-  author: string;
-  products: string;
-  createdAt?: Date;
-  updatedAt?: Date;
-  deletedAt?: Date | null,
-}
-
 interface Category {
   _id: string;
   name: string;
   products: string[];
   createdAt?: Date;
   updatedAt?: Date;
-  deletedAt?: Date | null,
+  deletedAt?: Date | null;
 }

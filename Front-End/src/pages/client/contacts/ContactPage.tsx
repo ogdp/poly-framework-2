@@ -1,32 +1,15 @@
-import React from "react";
-import { useReducer, useState } from "react";
 import { Button, Form, Input } from "antd";
-import { EyeInvisibleOutlined, EyeTwoTone } from "@ant-design/icons";
-import { message } from "antd";
 import { CreateContact } from "../../../services/contact";
 const ContactPage = () => {
   const { TextArea } = Input;
   const [form] = Form.useForm();
-  // const [messageContent, setMessageContent] = useState<{
-  //   message: string;
-  //   type: string;
-  // } | null>(null);
   const handleSubmit = async () => {
     const values = form.getFieldsValue();
     console.log(values);
-    // if (formValid.isValidExtract && formValid.isValidTitle) {
     try {
       await CreateContact(values);
-      // setMessageContent({
-      //   message: "Thêm mới thành công",
-      //   type: "success",
-      // });
       alert("Thành công");
     } catch (err: any) {
-      // setMessageContent({
-      //   message: err.message,
-      //   type: "error",
-      // });
       alert(err);
     }
     // }
@@ -35,10 +18,6 @@ const ContactPage = () => {
     <section className="my-10">
       <div className="grid lg:grid-cols-2 md:grid-cols-2 md:gap-4 lg:gap-8 grid-cols-1">
         <div>
-          {/* <img
-            src="https://res.cloudinary.com/do2d1jyoh/image/upload/v1689124215/Screenshot_407_z3ksz3.png"
-            alt=""
-          /> */}
           <iframe
             src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d697.39593968542!2d105.79803369783245!3d21.046789959217865!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3135ab6b960c64f3%3A0xe299d1031f8a0a95!2zQ2FvIMSR4bqzbmcgRlBUIHBvbHl0ZWNobmlj!5e0!3m2!1sen!2s!4v1689127447786!5m2!1sen!2s"
             style={{ border: 0 }}

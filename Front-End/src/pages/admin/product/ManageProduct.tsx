@@ -61,14 +61,18 @@ const ManageProduct = () => {
       title: "TÊN",
       dataIndex: "name",
       render: (t: any, r: any) => (
-        <Link to={`/products/${r.key}`} target="_blank">{`${r.name}`}</Link>
+        <Link
+          key={t}
+          to={`/products/${r.key}`}
+          target="_blank"
+        >{`${r.name}`}</Link>
       ),
     },
     {
       title: "GIÁ",
       dataIndex: "price",
       render: (t: any, r: any) => (
-        <h5 className="text-red-600 font-medium">{`${r.price}`}</h5>
+        <h5 key={t} className="text-red-600 font-medium">{`${r.price}`}</h5>
       ),
     },
     {
@@ -76,13 +80,13 @@ const ManageProduct = () => {
       dataIndex: "image",
       width: 100,
       maxWidth: 100,
-      render: (t: any, r: any) => <img src={`${r.image}`} />,
+      render: (t: any, r: any) => <img key={t} src={`${r.image}`} />,
     },
     {
       title: "KÍCH THƯỚC",
       dataIndex: "sizes",
       render: (t: any, r: any) => (
-        <div className="flex">
+        <div key={t} className="flex">
           <div className="border border-gray-300">
             <div className="border-b border-gray-300 font-semibold  px-3">
               Size

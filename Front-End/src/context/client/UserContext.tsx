@@ -1,8 +1,4 @@
-import React from "react";
-
-type Props = {};
-
-const UserContext = (props: Props) => {
+const UserContext = () => {
   return <div>UserContext</div>;
 };
 

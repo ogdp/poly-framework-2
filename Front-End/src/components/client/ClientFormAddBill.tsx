@@ -1,11 +1,11 @@
-import { useEffect, useState, useContext } from "react";
+import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import IUser from "../../types/user";
 import { Input, Modal, message, Form, Select, Button, Checkbox } from "antd";
 import TextArea from "antd/es/input/TextArea";
 import { ICartItem } from "../../types/cart";
 import { CreateBill } from "../../services/bill";
-import IBill, { DIBill, Itembill } from "../../types/bill";
+import { DIBill } from "../../types/bill";
 
 type TProps = {
   propNote: string;
@@ -25,6 +25,7 @@ const ClientFormAddBill = ({
   const [modal2Open, setModal2Open] = useState(true);
   const [user, setUser] = useState<IUser | undefined>(propUser);
   const [cart, setCart] = useState<ICartItem[] | boolean | null>(false);
+  setUser(undefined);
   useEffect(() => {
     setModal2Open(propCheck);
     form.setFieldsValue({
@@ -45,7 +46,6 @@ const ClientFormAddBill = ({
         undefined
       );
     let total = 0;
-    const sendCart: Itembill[] = [];
     if (typeof cart !== "boolean" && cart !== null) {
       for (const item of cart) {
         total += item.quantity * item.price;
@@ -82,7 +82,7 @@ const ClientFormAddBill = ({
       }
     }
   };
-  const onFinishFailed = (values: any) => {
+  const onFinishFailed = () => {
     message.error("Điền đầy đủ thông tin các trường", 2, () => {});
   };
   const methodPay = [

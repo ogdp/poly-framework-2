@@ -1,20 +1,25 @@
 import axios from "axios";
 
 const intansce = axios.create({
-  baseURL: "http://localhost:8080/api"
-})
+  baseURL: "https://api-main-framework-2.onrender.com/api",
+});
 // Add a request interceptor
-intansce.interceptors.request.use(function (config) {
-  return config;
-}, function (error) {
-  return Promise.reject(error);
-});
+intansce.interceptors.request.use(
+  function (config) {
+    return config;
+  },
+  function (error) {
+    return Promise.reject(error);
+  }
+);
 
-intansce.interceptors.response.use(function (response) {
+intansce.interceptors.response.use(
+  function (response) {
+    return response.data;
+  },
+  function (error) {
+    return Promise.reject(error);
+  }
+);
 
-  return response.data;
-}, function (error) {
-  return Promise.reject(error);
-});
-
-export default intansce
+export default intansce;
