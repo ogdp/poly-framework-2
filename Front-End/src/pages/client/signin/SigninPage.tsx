@@ -58,24 +58,24 @@ const SigninPage = () => {
         <p
           tabIndex={0}
           role="heading"
-          aria-label="Login to your account"
+          aria-label="Đăng nhập"
           className="text-2xl font-extrabold leading-6 text-gray-800"
         >
-          Login to your account
+          Đăng nhập
         </p>
         <p className="text-sm mt-4 font-medium leading-none text-gray-500">
-          Dont have account?{" "}
+          Bạn không có tài khoản ?{" "}
           <span
             tabIndex={0}
             role="link"
-            aria-label="Sign up here"
+            aria-label="Đăng ký tại đây"
             className="text-sm font-medium leading-none underline text-gray-800 cursor-pointer"
           >
             {" "}
-            <Link to="/signup">Sign up here</Link>
+            <Link to="/signup">Đăng ký tại đây</Link>
           </span>
         </p>
-        <button
+        {/* <button
           aria-label="Continue with google"
           role="button"
           className="focus:outline-none focus:ring-2 focus:ring-offset-1 focus:ring-gray-700 py-3.5 px-4 border rounded-lg border-gray-700 flex items-center w-full mt-10"
@@ -128,7 +128,7 @@ const SigninPage = () => {
           <p className="text-base font-medium ml-4 text-gray-700">
             Continue with Github
           </p>
-        </button>
+        </button> */}
         <div className="w-full flex items-center justify-between py-5">
           <hr className="w-full bg-gray-400" />
           <p className="text-base font-medium leading-4 px-2.5 text-gray-400">
@@ -156,7 +156,7 @@ const SigninPage = () => {
         <Form.Item
           className="text-black font-bold"
           name="password"
-          label="mật khẩu"
+          label="Mật khẩu"
           rules={[
             {
               message: "Vui lòng nhập password!",
@@ -193,7 +193,7 @@ const SigninPage = () => {
           htmlType="submit"
           className="w-full h-[52px] text-center py-3 rounded-xl bg-[black] text-white hover:bg-green-dark focus:outline-none my-1"
         >
-          Sign in
+          Đăng nhập
         </Button>
         <div>
           <ForgotPassword />

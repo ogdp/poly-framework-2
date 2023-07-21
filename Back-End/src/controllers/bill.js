@@ -167,11 +167,17 @@ export const createBill = async function (req, res) {
                       .map(
                         (item) => `
                     <li style="margin-bottom: 20px; padding: 20px; background-color: #f9f9f9; border-radius: 10px;">
-                        <img src="${item.image}" alt="" style="max-width: 100%; height: auto;"/>
+                        <img src="${
+                          item.image
+                        }" alt="" style="max-width: 100%; height: auto;"/>
                         <h3 style="margin-top: 0;">${item.name}</h3>
                         <p style="margin-bottom: 5px;">Size: ${item.size}</p>
-                        <p style="margin-bottom: 5px;">Số lượng: ${item.quantity}</p>
-                        <p style="margin-bottom: 0;">Đơn giá: ${item.price}</p>
+                        <p style="margin-bottom: 5px;">Số lượng: ${
+                          item.quantity
+                        }</p>
+                        <p style="margin-bottom: 0;">Đơn giá: ${
+                          item.price * item.quantity
+                        }</p>
                     </li>
                 `
                       )

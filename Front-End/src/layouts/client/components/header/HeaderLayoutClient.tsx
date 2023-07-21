@@ -127,36 +127,53 @@ export default function HeaderLayoutClient() {
                 </Badge>
               </Link>
             </div>
-            <div className="relative z-10">
-              <button className="text-gray-800" onClick={handleDropdownClick}>
-                <UserOutlined
-                  style={{ fontSize: "24px" }}
-                  className="h-8 w-8 transform hover:scale-110 transition duration-200"
-                />
-              </button>
-              {showDropdown && (
-                <div className="absolute right-0 mt-2 bg-white shadow-md rounded-md overflow-hidden z-10 w-48">
-                  <Link
-                    to="/profiles"
-                    className="block px-4 py-2 text-gray-800 hover:bg-gray-200"
-                  >
-                    Profile
-                  </Link>
-                  <Link
-                    to="/mybill"
-                    className="block px-4 py-2 text-gray-800 hover:bg-gray-200"
-                  >
-                    Đơn hàng của tôi
-                  </Link>
-                  <button
-                    onClick={handleLogout}
-                    className="w-full text-left px-4 py-2 text-gray-800 hover:bg-gray-200"
-                  >
-                    Logout
-                  </button>
-                </div>
-              )}
-            </div>
+            {user ? (
+              <div className="relative z-10">
+                <button className="text-gray-800" onClick={handleDropdownClick}>
+                  <UserOutlined
+                    style={{ fontSize: "24px" }}
+                    className="h-8 w-8 transform hover:scale-110 transition duration-200"
+                  />
+                </button>
+                {showDropdown && (
+                  <div className="absolute right-0 mt-2 bg-white shadow-md rounded-md overflow-hidden z-10 w-48">
+                    <Link
+                      to="/profiles"
+                      className="block px-4 py-2 text-gray-800 hover:bg-gray-200"
+                    >
+                      Profile
+                    </Link>
+                    <Link
+                      to="/mybill"
+                      className="block px-4 py-2 text-gray-800 hover:bg-gray-200"
+                    >
+                      Đơn hàng của tôi
+                    </Link>
+                    <button
+                      onClick={handleLogout}
+                      className="w-full text-left px-4 py-2 text-gray-800 hover:bg-gray-200"
+                    >
+                      Logout
+                    </button>
+                  </div>
+                )}
+              </div>
+            ) : (
+              <div className="flex justify-center">
+                <Link
+                  to="/signup"
+                  className="mx-4 px-4 py-2 bg-blue-500 hover:bg-blue-700 text-white font-semibold rounded-md"
+                >
+                  Đăng ký
+                </Link>
+                <Link
+                  to="/signin"
+                  className="mx-4 px-4 py-2 bg-green-500 hover:bg-green-700 text-white font-semibold rounded-md"
+                >
+                  Đăng nhập
+                </Link>
+              </div>
+            )}
           </div>
           {/* Burger Icon */}
           <div
