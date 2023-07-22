@@ -27,6 +27,8 @@ import WarrantyPage from "../pages/client/tos/warranty/WarrantyPage";
 import RulePage from "../pages/client/tos/rules/RulePage";
 import ReturnPage from "../pages/client/tos/return/ReturnPage";
 import MyListBill from "../pages/client/profiles/MyListBill";
+import ManageBill from "../pages/admin/bill";
+import ManageBillUpdate from "../pages/admin/bill/EditBill";
 
 const Router = () => {
   return (
@@ -73,6 +75,10 @@ const Router = () => {
           </Route>
           <Route path="accounts">
             <Route index element={<ManageUser />} />
+          </Route>
+          <Route path="bill">
+            <Route index element={<ManageBill />} />
+            <Route path=":id/edit" element={<ManageBillUpdate />} />
           </Route>
         </Route>
         <Route path="signin" element={<SigninPage />}></Route>
