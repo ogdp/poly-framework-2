@@ -1,8 +1,7 @@
 import { Table, Button, Empty, message, Modal } from "antd";
 import { useEffect, useState } from "react";
-import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
-import IComment from "../../../types/comment";
-import { AdGetAllComment, RemoveComment } from "../../../services/comments";
+import { EditOutlined } from "@ant-design/icons";
+
 import { Link } from "react-router-dom";
 import { formatDate } from "../../../utils/DateUtils";
 import { GetAllBill } from "../../../services/bill";
@@ -80,17 +79,13 @@ const ManageBill = () => {
 
     {
       title: "HÀNH ĐỘNG",
-      render: (item: IComment) => (
+      render: (item: any) => (
         <>
-          {item.role === "admin" ? (
-            <Button hidden>delete</Button>
-          ) : (
-            <Link to={`${item.key}/edit`}>
-              <button className="mx-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-                <EditOutlined />
-              </button>
-            </Link>
-          )}
+          <Link to={`${item.key}/edit`}>
+            <button className="mx-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+              <EditOutlined />
+            </button>
+          </Link>
         </>
       ),
     },

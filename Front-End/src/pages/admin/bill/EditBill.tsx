@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { Button, Col, Form, Input, Row, message, Select } from "antd";
-import { ICategory } from "../../../types/category";
 import { UpdateBill } from "../../../services/bill";
 import IBill from "../../../types/bill";
 import { GetOneBill } from "../../../services/bill";
@@ -19,7 +18,8 @@ const ManageBillUpdate = () => {
       });
       if (loading) {
         const response = await UpdateBill(values);
-        if (response) message.success("successfully update categories", 3);
+        if (response)
+          message.success("Cập nhật trạng thái đơn hàng thành công", 3);
         navigate("/admin/bill");
       }
     } catch (error: any) {
