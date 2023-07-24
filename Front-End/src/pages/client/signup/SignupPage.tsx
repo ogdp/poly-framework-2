@@ -1,45 +1,66 @@
-import { useRef, useState } from "react";
+// import { useRef, useState } from "react";
 import { Button, Form, Input } from "antd";
 import { Link, useNavigate } from "react-router-dom";
 import { message } from "antd";
 import IUser from "../../../types/user";
-import ReCAPTCHA from "react-google-recaptcha";
+// import ReCAPTCHA from "react-google-recaptcha";
 import { EyeInvisibleOutlined, EyeTwoTone } from "@ant-design/icons";
 import { Signup } from "../../../services/auth";
 const SignupPage = () => {
-  const [isVerified, setIsVerified] = useState<boolean>(false);
-  const recaptchaRef = useRef<ReCAPTCHA>(null);
+  // const [isVerified, setIsVerified] = useState<boolean>(false);
+  // const recaptchaRef = useRef<ReCAPTCHA>(null);
   const navigate = useNavigate();
 
   const onFinish = async (value: IUser) => {
-    if (isVerified == true) {
-      const key = "loading";
-      if (value) {
-        try {
-          const loading = await message.loading({
-            content: "loading!",
-            key,
-            duration: 2,
-          });
-          if (loading) {
-            const response: any = await Signup(value);
-            if (response) {
-              message.success(response.message, 3);
-              navigate("/");
-            }
+    // if (isVerified == true) {
+    const key = "loading";
+    if (value) {
+      try {
+        const loading = await message.loading({
+          content: "loading!",
+          key,
+          duration: 2,
+        });
+        if (loading) {
+          const response: any = await Signup(value);
+          if (response) {
+            message.success(response.message, 3);
+            navigate("/");
           }
-        } catch (error: any) {
-          message.error(error.response.data.message, 5);
         }
+      } catch (error: any) {
+        message.error(error.response.data.message, 5);
       }
     }
+    // }
+    // if (isVerified == true) {
+    //   const key = "loading";
+    //   if (value) {
+    //     try {
+    //       const loading = await message.loading({
+    //         content: "loading!",
+    //         key,
+    //         duration: 2,
+    //       });
+    //       if (loading) {
+    //         const response: any = await Signup(value);
+    //         if (response) {
+    //           message.success(response.message, 3);
+    //           navigate("/");
+    //         }
+    //       }
+    //     } catch (error: any) {
+    //       message.error(error.response.data.message, 5);
+    //     }
+    //   }
+    // }
   };
 
-  const handleRecaptcha = (value: string | null) => {
-    if (value) {
-      setIsVerified(true);
-    }
-  };
+  // const handleRecaptcha = (value: string | null) => {
+  //   if (value) {
+  //     setIsVerified(true);
+  //   }
+  // };
 
   return (
     <section>
@@ -146,7 +167,7 @@ const SignupPage = () => {
             }
           />
         </Form.Item>
-        <Form.Item>
+        {/* <Form.Item>
           <ReCAPTCHA
             className=""
             ref={recaptchaRef}
@@ -160,7 +181,7 @@ const SignupPage = () => {
               Vui lòng xác thực bằng Recaptcha trước khi tiếp tục.
             </p>
           )}
-        </Form.Item>
+        </Form.Item> */}
         <Button
           htmlType="submit"
           className="w-full h-[52px] text-center py-3 rounded-xl bg-[black] text-white hover:bg-green-dark focus:outline-none my-1"
