@@ -9,7 +9,7 @@ interface IBill {
   address: string;
   items: Itembill[];
   total: number;
-  status: String;
+  status: string;
   orderCode: number;
   createdAt?: Date;
   updatedAt?: Date;
