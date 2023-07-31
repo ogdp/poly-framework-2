@@ -282,3 +282,36 @@ export const forgotPassword = async (req, res) => {
     });
   }
 };
+
+export const verifyToken = async (req, res) => {
+  try {
+    const token = req.params.id;
+    const isMatch = await jwt.verify(token, REFRESH_SECRET);
+    const user = await User.findById(isMatch._id);
+    if (!user) {
+      return res.status(403).json({
+        message: "Token không hợp lệ",
+      });
+    }
+    if (user.role == "member") {
+      return res.status(200).json({
+        message: "member",
+        user,
+      });
+    }
+    if (user.role == "admin") {
+      return res.status(200).json({
+        message: "admin",
+        user,
+      });
+    }
+    return res.status(403).json({
+      message: "Token error",
+      token: req.params.id,
+    });
+  } catch (error) {
+    return res.status(400).json({
+      error: error.message,
+    });
+  }
+};
