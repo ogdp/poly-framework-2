@@ -7,6 +7,9 @@ import { ICategory } from "../../../types/category";
 import { IProduct } from "../../../types/product";
 import { GetOneCategory } from "../../../services/categories";
 import { Pagination } from "antd";
+import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch, RootState } from "../../../redux/store";
+import { fetchproducts } from "../../../redux/slices/product.slice";
 const ProductPage = () => {
   const [products, setProducts] = useState([]);
   const [category, setCategory] = useState([]);
@@ -19,6 +22,21 @@ const ProductPage = () => {
     indexOfFirstProduct,
     indexOfLastProduct
   );
+
+  // Redux
+  useSelector((state: RootState) => state.products);
+  const dispatch = useDispatch<AppDispatch>();
+
+  const handleFetchFilm = async () => {
+    try {
+      const data = await dispatch(fetchproducts()).unwrap();
+      return data;
+    } catch (err) {
+      console.log(err);
+    }
+  };
+  //
+
   useEffect(() => {
     onHandleGetAllProduct();
   }, []);
@@ -28,7 +46,8 @@ const ProductPage = () => {
   };
   async function onHandleGetAllProduct() {
     try {
-      const { data } = await GetAllProduct();
+      // const { data } = await GetAllProduct();
+      const data = await handleFetchFilm();
       setProducts(data);
       const res = await GetAllCategory();
       setCategory(res.data);
