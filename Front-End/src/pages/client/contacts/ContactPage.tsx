@@ -1,7 +1,5 @@
-import React from "react";
-import { useReducer, useState } from "react";
 import { Button, Form, Input } from "antd";
-import { EyeInvisibleOutlined, EyeTwoTone } from "@ant-design/icons";
+
 import { message } from "antd";
 import { CreateContact } from "../../../services/contact";
 const ContactPage = () => {
@@ -13,21 +11,19 @@ const ContactPage = () => {
   // } | null>(null);
   const handleSubmit = async () => {
     const values = form.getFieldsValue();
-    console.log(values);
-    // if (formValid.isValidExtract && formValid.isValidTitle) {
     try {
-      await CreateContact(values);
-      // setMessageContent({
-      //   message: "Thêm mới thành công",
-      //   type: "success",
-      // });
-      alert("Thành công");
-    } catch (err: any) {
-      // setMessageContent({
-      //   message: err.message,
-      //   type: "error",
-      // });
-      alert(err);
+      const key = "loading";
+      const loading = await message.loading({
+        content: "loading!",
+        key,
+        duration: 2,
+      });
+      if (loading) {
+        const response = await CreateContact(values);
+        if (response) message.success("Gửi thông tin thành công", 3);
+      }
+    } catch (error: any) {
+      message.error(error.response.data.message, 5);
     }
     // }
   };

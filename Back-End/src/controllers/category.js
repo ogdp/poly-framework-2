@@ -101,7 +101,7 @@ export const updateCategory = async function (req, res) {
 };
 export const removeCategory = async function (req, res) {
   try {
-    const categories = await Category.findById(req.params.id);
+    const categories = await Category.findByIdAndRemove(req.params.id);
     if (!categories) {
       return res.status(404).json({
         message: "Xóa danh mục thất bại",
