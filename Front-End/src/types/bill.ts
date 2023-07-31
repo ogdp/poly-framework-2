@@ -1,4 +1,5 @@
 interface IBill {
+  date: string | number | Date;
   map(arg0: (item: any) => import("react/jsx-runtime").JSX.Element): import("react").ReactNode;
   _id: string;
   key: string;
