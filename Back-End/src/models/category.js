@@ -19,19 +19,20 @@ const CategoryModel = new mongoose.Schema(
   }
 );
 
-CategoryModel.pre("findOne", async function (next) {
+CategoryModel.pre("findOneAndDelete", async function (next) {
   try {
     // Lấy model Product từ biến đã import
     const Product = mongoose.model("Product");
     //  lấy điều kiện tìm kiếm hiện tại của câu lệnh, xác định category mà đang được xóa trong trường hợp này.
-    // const filter = this.getFilter();
+    const filter = this.getFilter();
     //kiểm tra xem câu lệnh truy vấn có chứa trường categoryId được cập nhật không, nếu có lấy giá trị của trường đó để cập nhật cho các sản phẩm có cùng categoryId.
     const categoryId = this.getQuery().$set?.categoryId;
     console.log(categoryId);
-    const filter = { categoryId: "64b932e6295d91ffcdd5e1a7" };
-    const update = { $set: { categoryId: "64a0e5b72d0596968fdcf0a4" } };
-    console.log(update);
-    await Product.updateMany(filter, update);
+
+    Product.updateMany(
+      { "CategoryId._id": categoryId },
+      { $set: { "CategoryId._id": "64a0e5b72d0596968fdcf0a4" } }
+    );
     next();
   } catch (err) {
     next(err);
